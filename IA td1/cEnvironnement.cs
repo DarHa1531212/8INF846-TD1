@@ -36,6 +36,7 @@ namespace IA_td1
         {
 
             char[,] tempEnvironnemen = Environnement;
+            cSmartAgent tempAgent = new cSmartAgent();
             double rng;
             Random r = new Random();
 
@@ -68,6 +69,7 @@ namespace IA_td1
 
                 }
             }
+            tempAgent.AgentCanMoove = true;
             return tempEnvironnemen;
         }
 

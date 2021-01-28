@@ -52,6 +52,11 @@ namespace IA_td1
 
         }
 
+        public cSmartAgent()
+        {
+
+        }
+
         private List<cMovement> RecursiveDS(char[,] inEnvironnement, List<cMovement> positionList)
         {
             //if there's no more dust
@@ -94,9 +99,9 @@ namespace IA_td1
                 }
             }
 
-            return 
+             
 
-           / RecursiveDS(outEnvironnement)
+           // RecursiveDS(outEnvironnement)
 
 
             //TODO remove this line
@@ -128,7 +133,7 @@ namespace IA_td1
 
         private List<cMovement> FindValidMoves(cMovement position) {
             //potential moves
-            List<cMovement> potentialMoves = new List<cMovement>;
+            List<cMovement> potentialMoves = new List<cMovement>();
 
             //TODO validate that a given move does not return to a previous position, except for noMouvement
 
@@ -160,26 +165,22 @@ namespace IA_td1
 
         private bool IsOutOfBounds(int x, int y) {
             int bound = 5;
-            return (x >= 0) && (x < bound) && (y >= 0) && (y < bound)
+            return (x >= 0) && (x < bound) && (y >= 0) && (y < bound);
         }
             
 
         private bool HasDust(char[,] environnement)
         {
-
-            bool found = false;
-
             for (int X = 0; X < 5; X++) {
                 for (int Y = 0; Y < 5; Y++)
                 {
                     if (environnement[X, Y] == 'D' || environnement[X, Y] == 'B')
                     {
-                        found = true;
-                        break;
+                        return true;
                     }
                 }
             }
-            return true;
+            return false;
         }
 
         //s'il y a un diamant ici, ramasser

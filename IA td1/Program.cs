@@ -12,11 +12,8 @@ namespace IA_td1
         {
             cEnvironnement mansion = new cEnvironnement();
             mansion.drawEnvironnement();
-
-            while (true)
-            {
-
-            }
+            cSmartAgent agent = new cSmartAgent(mansion);
+         
         }
     }
 }
