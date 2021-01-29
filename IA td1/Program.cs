@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IA_td1
+namespace AI_TD1
 {
     class Program
     {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IA_td1
+namespace AI_TD1
 {
-    class cEnvironnement
+    public class cEnvironnement
     {
         #region Ctor
         private const double dustRate = 100000 / 25 / 1;
@@ -87,6 +87,7 @@ namespace IA_td1
                 }
             }
 
+            //TODO refactor this function
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
