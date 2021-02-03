@@ -7,15 +7,20 @@ using System.Threading.Tasks;
 
 namespace AI_TD1
 {
-    public class cEnvironnement
+    public class cEnvironment
     {
         #region Ctor
         private const double dustRate = 100000 / 25 / 1;
         private const double diamondRate = 100000 / 25 / 4;
 
-        public char[,] Environnement { get; set; }
+        public char[,] Environnement { get; }
+        public int AgentPosX { get => agentPosX;}
+        public int AgentPosY { get => agentPosY;}
 
-        public cEnvironnement()
+        private int agentPosX;
+        private int agentPosY;
+
+        public cEnvironment()
         {
             Environnement = new char[5, 5];
             Environnement = InitialiseEnvironnement();
@@ -34,7 +39,6 @@ namespace AI_TD1
 
         private char[,] UpdateEnvironnement()
         {
-
             char[,] tempEnvironnemen = Environnement;
             cSmartAgent tempAgent = new cSmartAgent();
             double rng;
@@ -97,7 +101,6 @@ namespace AI_TD1
 
                     if (rng <= dustRate)
                     {
-                        Console.WriteLine("dustRate!");
                         tempEnvironnemen[i, j] = 'D';
                     }
 
@@ -121,6 +124,56 @@ namespace AI_TD1
         #endregion
 
         #region Public Methods
+        public void MoveAgent(cActionsEnum.Actions move)
+        {
+            switch (move) {
+
+                case cActionsEnum.Actions.Right: agentPosX++;
+                    break;
+                case cActionsEnum.Actions.Left: agentPosX--;
+                    break;
+                case cActionsEnum.Actions.Up: agentPosY--;
+                    break;
+                case cActionsEnum.Actions.Down: agentPosY++;
+                    break;
+                case cActionsEnum.Actions.PickUp: Console.WriteLine("PickUp");
+                    break;
+                case cActionsEnum.Actions.Vacuum: Console.WriteLine("Vacuum");
+                    break;
+            }
+        }
+
+        public bool IsOutOfBounds(int x, int y)
+        {
+            int bound = 5;
+            return (x >= 0) && (x < bound) && (y >= 0) && (y < bound);
+        }
+
+        public bool HasDust()
+        {
+            for (int X = 0; X < 5; X++)
+            {
+                for (int Y = 0; Y < 5; Y++)
+                {
+                    if (Environnement[X, Y] == 'D' || Environnement[X, Y] == 'B')
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool IsAgentOnDust() 
+        {
+            return Environnement[agentPosX, agentPosY] == 'D' || Environnement[agentPosX, agentPosY] == 'B';
+        }
+
+        public bool IsAgentOnJewel() 
+        {
+            return Environnement[agentPosX, agentPosY] == 'J' || Environnement[agentPosX, agentPosY] == 'B';
+        }
+
         public void drawEnvironnement()
         {
             cSmartAgent tempAgent = new cSmartAgent();

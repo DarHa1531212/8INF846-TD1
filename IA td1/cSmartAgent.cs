@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace AI_TD1
 {
+
+    //TODO clean up diamonds too
     public class cSmartAgent
     {
         private static int locationX;
@@ -32,13 +34,14 @@ namespace AI_TD1
         }
 
 
-        public cSmartAgent(cEnvironnement mansion)
+        public cSmartAgent(cEnvironment mansion)
         {
+   
             locationX = 0;
             locationY = 4;
 
-            cMovement initialPosition = new cMovement(locationX, LocationY, actualCost);
-            List<cMovement> positionList = new List<cMovement>();
+            cAction initialPosition = new cAction(locationX, LocationY, actualCost);
+            List<cAction> positionList = new List<cAction>();
 
             positionList.Add(initialPosition);
 
@@ -46,11 +49,14 @@ namespace AI_TD1
             {
                 if (agentCanMove)
                 {
-                    List<cMovement> movements = RecursiveDS(mansion.Environnement, positionList);
-                    cMovement firstMovementToExecute = movements.First();
+                    List<cAction> movements = RecursiveDS(positionList, mansion);
+                    cAction firstMovementToExecute = movements.First();
                     actualCost = firstMovementToExecute.Cost;
-                    
+
                     //TODO: Act on first movement to execute
+                    firstMovementToExecute.DoAction(mansion);
+                    moveAgent(mansion);
+
 
 
                     agentCanMove = false;
@@ -63,21 +69,34 @@ namespace AI_TD1
         public cSmartAgent()
         { }
 
-        private List<cMovement> RecursiveDS(char[,] inEnvironnement, List<cMovement> positionList)
+
+        private moveAgent(cEnvironment mansion)
+        {
+            switch (firstMovementToExecute)
+            {
+                case "GoLeft":
+                    mansion.AgentGoLeft();
+                    break;
+                case "GoRight": mansion.AgentGoRight();
+
+            }
+        }
+        //non informed search
+        private List<cAction> RecursiveDS(List<cAction> positionList, cEnvironment inEnvironnement)
         {
             bool canMove = true;
             //cutoff occured
             //we have no depth limited, cutoff never occurs due to depth
 
             //if goal achieved, return node
-            if (!HasDust(inEnvironnement))
+            if (!inEnvironnement.HasDust())
             {
                 return positionList;
             }
 
-            char[,] outEnvironnement = inEnvironnement;
+            cEnvironment outEnvironnement = inEnvironnement;
             //get last item from position list
-            cMovement temp = positionList.Last();
+            cAction temp = positionList.Last();
 
             //else if Depth[node] = limit then return cutorr
             //not applicable since we have no cutoff
@@ -98,17 +117,17 @@ namespace AI_TD1
             }
 
             //else for each sucessor in EXPAND(Node, problem)
-            List<cMovement> potentialMoves = FindValidMoves(temp, canMove);
+            List<cAction> potentialMoves = FindValidMoves(temp, canMove);
 
 
-            List<cMovement> bestMove;
+            List<cAction> bestMove;
             int cheapestMove = 99999;
-            foreach (cMovement move in potentialMoves /*where move.reussi == true*/)
+            foreach (cAction move in potentialMoves /*where move.reussi == true*/)
             {
-                List<cMovement> tempList = positionList;
+                List<cAction> tempList = positionList;
                 tempList.Add(move);
 
-                List<cMovement> resultList =  RecursiveDS(outEnvironnement, tempList);
+                List<cAction> resultList =  RecursiveDS(outEnvironnement, tempList);
                 int cost = resultList.Last().Cost;
 
                 if (cost < cheapestMove)
@@ -124,71 +143,54 @@ namespace AI_TD1
 
 
             //TODO remove this line
-            return new List<cMovement>();
+            return new List<cAction>();
 
         }
 
-        private List<cMovement> FindValidMoves(cMovement position, bool canMove)
+        private List<cAction> FindValidMoves(cAction position, bool canMove, cEnvironment inEnvironment)
         {
-            List<cMovement> potentialMoves = new List<cMovement>();
+            List<cAction> potentialMoves = new List<cAction>();
 
             //TODO validate that a given move does not return to a previous position, except for noMouvement
             if (canMove)
             {
-                cMovement movementRight = new cMovement(position.PositionX + 1, position.PositionY, position.Cost + 1);
-                if (!IsOutOfBounds(movementRight.PositionX, movementRight.PositionY))
+                cAction movementRight = new cAction(position.PositionX + 1, position.PositionY, position.Cost + 1);
+                if (!inEnvironment.IsOutOfBounds(movementRight.PositionX, movementRight.PositionY))
                 {
                     potentialMoves.Add(movementRight);
                 }
 
-                cMovement movementLeft = new cMovement(position.PositionX - 1, position.PositionY, position.Cost + 1);
-                if (!IsOutOfBounds(movementLeft.PositionX, movementLeft.PositionY))
+                cAction movementLeft = new cAction(position.PositionX - 1, position.PositionY, position.Cost + 1);
+                if (!inEnvironment.IsOutOfBounds(movementLeft.PositionX, movementLeft.PositionY))
                 {
                     potentialMoves.Add(movementLeft);
                 }
 
-                cMovement movementBottom = new cMovement(position.PositionX, position.PositionY + 1, position.Cost + 1);
-                if (!IsOutOfBounds(movementBottom.PositionX, movementBottom.PositionY))
+                cAction movementBottom = new cAction(position.PositionX, position.PositionY + 1, position.Cost + 1);
+                if (!inEnvironment.IsOutOfBounds(movementBottom.PositionX, movementBottom.PositionY))
                 {
                     potentialMoves.Add(movementBottom);
                 }
 
-                cMovement movementTop = new cMovement(position.PositionX, position.PositionY - 1, position.Cost + 1);
-                if (!IsOutOfBounds(movementTop.PositionX, movementTop.PositionY))
+                cAction movementTop = new cAction(position.PositionX, position.PositionY - 1, position.Cost + 1);
+                if (!inEnvironment.IsOutOfBounds(movementTop.PositionX, movementTop.PositionY))
                 {
                     potentialMoves.Add(movementTop);
                 }
             }
             else
             {
-                cMovement noMovement = new cMovement(position.PositionX, position.PositionY, position.Cost);
+                cAction noMovement = new cAction(position.PositionX, position.PositionY, position.Cost);
                 potentialMoves.Add(noMovement);
             }
 
             return potentialMoves;
         }
 
-        private bool IsOutOfBounds(int x, int y)
-        {
-            int bound = 5;
-            return (x >= 0) && (x < bound) && (y >= 0) && (y < bound);
-        }
 
 
-        private bool HasDust(char[,] environnement)
-        {
-            for (int X = 0; X < 5; X++)
-            {
-                for (int Y = 0; Y < 5; Y++)
-                {
-                    if (environnement[X, Y] == 'D' || environnement[X, Y] == 'B')
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+
+       
 
     }
 }

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C19D3FE3-6A90-426F-8E43-FA18CC3BF847}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>IA_td1</RootNamespace>
+    <RootNamespace>AI_TD1</RootNamespace>
     <AssemblyName>IA td1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,7 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cEnvironnement.cs" />
-    <Compile Include="cMovement.cs" />
+    <Compile Include="cAction.cs" />
+    <Compile Include="cActionsEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="cSmartAgent.cs" />

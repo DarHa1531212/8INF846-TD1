@@ -11,8 +11,8 @@ namespace cMovementTest
         public void TestEqualsAssertTrue()
         {
             //Arrange
-            cMovement movement = new cMovement(3,3,0);
-            cMovement comparredMovement = new cMovement(3, 3, 1);
+            cAction movement = new cAction(3,3,0);
+            cAction comparredMovement = new cAction(3, 3, 1);
 
             //Act
             bool result = movement.Equals(comparredMovement);
@@ -25,8 +25,8 @@ namespace cMovementTest
         public void TestEqualsAssertFalse()
         {
             //Arrange
-            cMovement movement = new cMovement(3, 2, 0);
-            cMovement comparredMovement = new cMovement(3, 3, 1);
+            cAction movement = new cAction(3, 2, 0);
+            cAction comparredMovement = new cAction(3, 3, 1);
 
             //Act
             bool result = movement.Equals(comparredMovement);
