@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace AI_TD1
 {
-    public abstract class cAction
+    class cAction
     {
+        private Actions latestAction;
         private int cost;
 
-        List<cAction> forbiddenPositions;
 
-
+        public Actions LatestAction { get => latestAction;}
         public int Cost { get => cost; set => cost = value; }
 
-        public abstract void DoAction(cEnvironment environment);
-     
-        
+        public cAction(Actions selectedMovement, int cost)
+        {
+            latestAction = selectedMovement;
+        }
 
-        public List<cAction> ForbiddenPositions { get => forbiddenPositions; set => forbiddenPositions = value; }
-
-  
-
+        public void DoAction(cEnvironment environment) {
+            environment.MoveAgent(latestAction);
+        }
     }
 }

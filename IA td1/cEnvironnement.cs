@@ -13,33 +13,40 @@ namespace AI_TD1
         private const double dustRate = 100000 / 25 / 1;
         private const double diamondRate = 100000 / 25 / 4;
 
-        public char[,] Environnement { get; }
-        public int AgentPosX { get => agentPosX;}
-        public int AgentPosY { get => agentPosY;}
+        private char[,] environment;
+        public char[,] Environment
+        {
+            get { return environment; }
+
+        }
+        public int AgentPosX { get => agentPosX; }
+        public int AgentPosY { get => agentPosY; }
 
         private int agentPosX;
         private int agentPosY;
 
-        public cEnvironment()
+        public cEnvironment(int agentPosX, int agentPosY)
         {
-            Environnement = new char[5, 5];
-            Environnement = InitialiseEnvironnement();
-            while (true)
-            {
-                Thread.Sleep(1500);
-                Environnement = UpdateEnvironnement();
-                drawEnvironnement();
-            }
+            this.agentPosX = agentPosX;
+            this.agentPosY = agentPosY;
+            environment = new char[5, 5];
+            environment = InitialiseEnvironnement();
+            UpdateEnvironnement();
 
+        }
+
+        public cEnvironment(int agentPosX, int agentPosY, char[,] env) : this(agentPosX, agentPosY)
+        {
+            Array.Copy(env, this.Environment, env.GetLength(0) * env.GetLength(1));
         }
 
         #endregion
 
         #region Private Methods
 
-        private char[,] UpdateEnvironnement()
+        public void UpdateEnvironnement()
         {
-            char[,] tempEnvironnemen = Environnement;
+            char[,] tempEnvironnemen = Environment;
             cSmartAgent tempAgent = new cSmartAgent();
             double rng;
             Random r = new Random();
@@ -74,79 +81,80 @@ namespace AI_TD1
                 }
             }
             tempAgent.AgentCanMoove = true;
-            return tempEnvironnemen;
+
+            environment = tempEnvironnemen;
         }
 
         private char[,] InitialiseEnvironnement()
         {
-            char[,] tempEnvironnemen = new char[5, 5];
-            double rng;
-            Random r = new Random();
+            char[,] tempEnv = new char[5, 5];
 
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    tempEnvironnemen[i, j] = '*';
+                    tempEnv[i, j] = '*';
                 }
             }
+            return tempEnv;
+        }
 
-            //TODO refactor this function
-            for (int i = 0; i < 5; i++)
+        private char PickUp()
+        {
+            switch (Environment[agentPosX, agentPosY])
             {
-                for (int j = 0; j < 5; j++)
-                {
-                    //testing dust drop
-                    rng = r.Next(0, 100000);
 
-                    if (rng <= dustRate)
-                    {
-                        tempEnvironnemen[i, j] = 'D';
-                    }
-
-                    //testing diamond drop
-                    rng = r.Next(0, 100000);
-                    if (rng <= diamondRate)
-                    {
-                        if (tempEnvironnemen[i, j] != 'D')
-                            tempEnvironnemen[i, j] = 'J';
-
-                        else
-                            tempEnvironnemen[i, j] = 'B';
-
-                    }
-
-                }
+                case 'B': return 'D';
+                case 'J': return '*';
+                case 'D': return 'D';
+                default: return '*';
             }
-            return tempEnvironnemen;
-
         }
         #endregion
 
         #region Public Methods
-        public void MoveAgent(cActionsEnum.Actions move)
-        {
-            switch (move) {
 
-                case cActionsEnum.Actions.Right: agentPosX++;
+        public cEnvironment CopyEnvironment()
+        {
+            return new cEnvironment(AgentPosX, AgentPosY, environment);
+
+        }
+
+        public void MoveAgent(Actions move)
+        {
+            switch (move)
+            {
+                //TODO add penalty points for vacuuming jewel
+                case Actions.Right:
+                    agentPosX++;
                     break;
-                case cActionsEnum.Actions.Left: agentPosX--;
+                case Actions.Left:
+                    agentPosX--;
                     break;
-                case cActionsEnum.Actions.Up: agentPosY--;
+                case Actions.Up:
+                    agentPosY--;
                     break;
-                case cActionsEnum.Actions.Down: agentPosY++;
+                case Actions.Down:
+                    agentPosY++;
                     break;
-                case cActionsEnum.Actions.PickUp: Console.WriteLine("PickUp");
+                case Actions.PickUp:
+                    Environment[agentPosX, agentPosY] = PickUp();
                     break;
-                case cActionsEnum.Actions.Vacuum: Console.WriteLine("Vacuum");
+                case Actions.Vacuum:
+                    Environment[agentPosX, agentPosY] = '*';
                     break;
             }
         }
 
-        public bool IsOutOfBounds(int x, int y)
+        public bool IsPotentialMoveOutOfBounds(Actions potentialAction)
         {
+            //todo create test to validate copy of cEnvironment object
             int bound = 5;
-            return (x >= 0) && (x < bound) && (y >= 0) && (y < bound);
+            cEnvironment potentialEnv = CopyEnvironment();
+            potentialEnv.MoveAgent(potentialAction);
+
+            return !((potentialEnv.AgentPosX >= 0) && (potentialEnv.AgentPosX < bound)
+                && (potentialEnv.AgentPosY >= 0) && (potentialEnv.AgentPosY < bound));
         }
 
         public bool HasDust()
@@ -155,7 +163,7 @@ namespace AI_TD1
             {
                 for (int Y = 0; Y < 5; Y++)
                 {
-                    if (Environnement[X, Y] == 'D' || Environnement[X, Y] == 'B')
+                    if (Environment[X, Y] == 'D' || Environment[X, Y] == 'B')
                     {
                         return true;
                     }
@@ -164,22 +172,17 @@ namespace AI_TD1
             return false;
         }
 
-        public bool IsAgentOnDust() 
+        public char GetAgentLocationStatus()
         {
-            return Environnement[agentPosX, agentPosY] == 'D' || Environnement[agentPosX, agentPosY] == 'B';
+            return environment[agentPosX, agentPosY];
         }
 
-        public bool IsAgentOnJewel() 
-        {
-            return Environnement[agentPosX, agentPosY] == 'J' || Environnement[agentPosX, agentPosY] == 'B';
-        }
-
-        public void drawEnvironnement()
+        public void DrawEnvironnement()
         {
             cSmartAgent tempAgent = new cSmartAgent();
             int agentLocationX = tempAgent.LocationX;
             int agentLocationY = tempAgent.LocationY;
-            
+
 
 
             Console.Clear();
@@ -198,7 +201,7 @@ namespace AI_TD1
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    Console.Write(Environnement[Y, X]);
+                    Console.Write(Environment[Y, X]);
                     Console.ForegroundColor = ConsoleColor.White;
 
                 }

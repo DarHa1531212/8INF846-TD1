@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="cEnvironnement.cs" />
     <Compile Include="cAction.cs" />
-    <Compile Include="cActionsEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="cSmartAgent.cs" />

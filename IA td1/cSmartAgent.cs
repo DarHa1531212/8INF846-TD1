@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace AI_TD1
 {
+    public enum Actions
+    {
+        Right, Left, Up, Down, PickUp, Vacuum
+    }
 
     //TODO clean up diamonds too
     public class cSmartAgent
     {
+
         private static int locationX;
         private static int locationY;
 
@@ -36,20 +41,14 @@ namespace AI_TD1
 
         public cSmartAgent(cEnvironment mansion)
         {
-   
-            locationX = 0;
-            locationY = 4;
-
-            cAction initialPosition = new cAction(locationX, LocationY, actualCost);
-            List<cAction> positionList = new List<cAction>();
-
-            positionList.Add(initialPosition);
+            Console.WriteLine("in Agent");
+            List<cAction> actionsList = new List<cAction>();
 
             while (true)
             {
                 if (agentCanMove)
                 {
-                    List<cAction> movements = RecursiveDS(positionList, mansion);
+                    List<cAction> movements = RecursiveDS(actionsList, mansion);
                     cAction firstMovementToExecute = movements.First();
                     actualCost = firstMovementToExecute.Cost;
 
@@ -70,55 +69,24 @@ namespace AI_TD1
         { }
 
 
-        private moveAgent(cEnvironment mansion)
+        private void moveAgent(cEnvironment mansion)
         {
-            switch (firstMovementToExecute)
-            {
-                case "GoLeft":
-                    mansion.AgentGoLeft();
-                    break;
-                case "GoRight": mansion.AgentGoRight();
 
-            }
         }
         //non informed search
         private List<cAction> RecursiveDS(List<cAction> positionList, cEnvironment inEnvironnement)
         {
-            bool canMove = true;
-            //cutoff occured
-            //we have no depth limited, cutoff never occurs due to depth
+            Actions chosenAction;
 
-            //if goal achieved, return node
             if (!inEnvironnement.HasDust())
             {
                 return positionList;
             }
 
             cEnvironment outEnvironnement = inEnvironnement;
-            //get last item from position list
-            cAction temp = positionList.Last();
+            cAction lastAction = positionList.Last();
 
-            //else if Depth[node] = limit then return cutorr
-            //not applicable since we have no cutoff
-
-
-            if (inEnvironnement[temp.PositionX, temp.PositionY] == 'B')
-            {
-                //Picked up jewel
-                outEnvironnement[temp.PositionX, temp.PositionY] = 'D';
-                temp.Cost++;
-                canMove = false;
-            }
-            else if (inEnvironnement[temp.PositionX, temp.PositionY] == 'D')
-            {
-                outEnvironnement[temp.PositionX, temp.PositionY] = '*';
-                temp.Cost++;
-                canMove = false;
-            }
-
-            //else for each sucessor in EXPAND(Node, problem)
-            List<cAction> potentialMoves = FindValidMoves(temp, canMove);
-
+            List<cAction> potentialMoves = FindValidActions(lastAction, outEnvironnement);
 
             List<cAction> bestMove;
             int cheapestMove = 99999;
@@ -127,7 +95,7 @@ namespace AI_TD1
                 List<cAction> tempList = positionList;
                 tempList.Add(move);
 
-                List<cAction> resultList =  RecursiveDS(outEnvironnement, tempList);
+                List<cAction> resultList = RecursiveDS(tempList,  outEnvironnement);
                 int cost = resultList.Last().Cost;
 
                 if (cost < cheapestMove)
@@ -136,61 +104,64 @@ namespace AI_TD1
                     cheapestMove = resultList.Last().Cost;
                 }
             }
-
-
-
-            // RecursiveDS(outEnvironnement)
-
-
-            //TODO remove this line
             return new List<cAction>();
-
         }
 
-        private List<cAction> FindValidMoves(cAction position, bool canMove, cEnvironment inEnvironment)
+        private List<cAction> FindValidActions(cAction previousAction, cEnvironment inEnvironment)
         {
+            int penalty = 5;
+            //TODO validate that a given move does not return to a previous position, except for noMouvement
+
+
             List<cAction> potentialMoves = new List<cAction>();
 
-            //TODO validate that a given move does not return to a previous position, except for noMouvement
-            if (canMove)
+            if (inEnvironment.GetAgentLocationStatus() == 'B')
             {
-                cAction movementRight = new cAction(position.PositionX + 1, position.PositionY, position.Cost + 1);
-                if (!inEnvironment.IsOutOfBounds(movementRight.PositionX, movementRight.PositionY))
-                {
-                    potentialMoves.Add(movementRight);
-                }
-
-                cAction movementLeft = new cAction(position.PositionX - 1, position.PositionY, position.Cost + 1);
-                if (!inEnvironment.IsOutOfBounds(movementLeft.PositionX, movementLeft.PositionY))
-                {
-                    potentialMoves.Add(movementLeft);
-                }
-
-                cAction movementBottom = new cAction(position.PositionX, position.PositionY + 1, position.Cost + 1);
-                if (!inEnvironment.IsOutOfBounds(movementBottom.PositionX, movementBottom.PositionY))
-                {
-                    potentialMoves.Add(movementBottom);
-                }
-
-                cAction movementTop = new cAction(position.PositionX, position.PositionY - 1, position.Cost + 1);
-                if (!inEnvironment.IsOutOfBounds(movementTop.PositionX, movementTop.PositionY))
-                {
-                    potentialMoves.Add(movementTop);
-                }
+                //a given action has a cost of 1, if the agent vacuums on Both, cost points are added as a penalty for vacuuming a jewel
+                cAction vacuumAction = new cAction(Actions.Vacuum, previousAction.Cost + 1 + penalty);
+                cAction pickupAction = new cAction(Actions.PickUp, previousAction.Cost + 1);
+                potentialMoves.Add(vacuumAction);
+                potentialMoves.Add(pickupAction);
             }
-            else
+
+            if (inEnvironment.GetAgentLocationStatus() == 'D')
             {
-                cAction noMovement = new cAction(position.PositionX, position.PositionY, position.Cost);
-                potentialMoves.Add(noMovement);
+                cAction vacuumAction = new cAction(Actions.Vacuum, previousAction.Cost + 1);
+                potentialMoves.Add(vacuumAction);
+            }
+
+            if (inEnvironment.GetAgentLocationStatus() == 'J')
+            {
+                cAction pickupAction = new cAction(Actions.PickUp, previousAction.Cost + 1);
+                potentialMoves.Add(pickupAction);
+            }
+
+            cAction movementRight = new cAction(Actions.Right, previousAction.Cost + 1);
+            if (!inEnvironment.IsPotentialMoveOutOfBounds(movementRight.LatestAction))
+            {
+                potentialMoves.Add(movementRight);
+            }
+
+            cAction movementLeft = new cAction(Actions.Left, previousAction.Cost + 1);
+            if (!inEnvironment.IsPotentialMoveOutOfBounds(movementLeft.LatestAction))
+            {
+                potentialMoves.Add(movementLeft);
+            }
+
+            cAction movementDown = new cAction(Actions.Down, previousAction.Cost + 1);
+            if (!inEnvironment.IsPotentialMoveOutOfBounds(movementDown.LatestAction))
+            {
+                potentialMoves.Add(movementDown);
+            }
+
+            cAction movementUp = new cAction(Actions.Up, previousAction.Cost + 1);
+            if (!inEnvironment.IsPotentialMoveOutOfBounds(movementUp.LatestAction))
+            {
+                potentialMoves.Add(movementUp);
             }
 
             return potentialMoves;
         }
-
-
-
-
-       
 
     }
 }
