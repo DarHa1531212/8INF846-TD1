@@ -61,7 +61,7 @@ namespace cMovementTest
         #endregion
 
         [TestMethod]
-        public void T_EnvironmentCopy()
+        public void T_CopyEnvironment_AgentDuplicated()
         {
             //Arrange
             cEnvironment environment1 = new cEnvironment(0, 0);
@@ -71,31 +71,51 @@ namespace cMovementTest
             environment1.MoveAgent(Actions.Right);
 
             //Assert
-
             Assert.IsTrue(environment2.AgentPosX == 0);
         }
 
         [TestMethod]
-        public void T_EnvironmentCopy_TestingOnBoard()
+        public void T_CopyEnvironment_EnvironmentCopied()
         {
             //Arrange
-            char[,] tempEnv = {
+            char[,] env = {
                 {'D', '*', '*', '*', '*' },
                 {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', '*', '*' },
+                {'*', 'D', 'B', '*', '*' },
+                {'*', '*', 'J', '*', '*' },
                 {'*', '*', '*', '*', '*' }
             };
+            cEnvironment environment1 = new cEnvironment(0, 0, env);
 
-            cEnvironment environment1 = new cEnvironment(0, 0, tempEnv);
+            //Act
+            cEnvironment environment2 = environment1.CopyEnvironment();
+
+            //Assert
+            CollectionAssert.AreEqual(environment2.Environment, env);
+        }
+
+        [TestMethod]
+        public void T_CopyEnvironment_EnvironmentDuplicated()
+        {
+            //Arrange
+            char[,] env = {
+                {'D', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', 'D', 'B', '*', '*' },
+                {'*', '*', 'J', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment1 = new cEnvironment(0, 0, env);
 
             //Act
             cEnvironment environment2 = environment1.CopyEnvironment();
             environment1.MoveAgent(Actions.Vacuum);
 
             //Assert
-
-            Assert.IsTrue(environment2.Environment[0, 0] == 'D');
+            CollectionAssert.AreNotEqual(
+                environment2.Environment, 
+                environment1.Environment
+            );
         }
 
         [TestMethod]
@@ -113,7 +133,7 @@ namespace cMovementTest
             // Act
             cEnvironment target = new cEnvironment(0, 0);
             PrivateObject obj = new PrivateObject(target);
-            char[,] retVal = (char[,])obj.Invoke("InitialiseEnvironnement");
+            char[,] retVal = (char[,])obj.Invoke("InitialiseEnvironment");
 
             // Assert
             CollectionAssert.AreEqual(emptyEnv, retVal);
@@ -297,6 +317,46 @@ namespace cMovementTest
                 Tuple.Create(target.AgentPosX, target.AgentPosY)
             );
 
+        }
+
+        [TestMethod]
+        public void T_MoveAgent_PickUp()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'J', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
+
+            //Act
+            target.MoveAgent(Actions.PickUp);
+
+            //Assert
+            Assert.AreNotEqual(target.Environment, currentEnvironment);
+        }
+
+        [TestMethod]
+        public void T_MoveAgent_Vacuum()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'D', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
+
+            //Act
+            target.MoveAgent(Actions.Vacuum);
+
+            //Assert
+            Assert.AreNotEqual(target.Environment, currentEnvironment);
         }
 
         [TestMethod]
@@ -628,7 +688,7 @@ namespace cMovementTest
         }
 
         [TestMethod]
-        public void T_GetAgentLocationStatus_None()
+        public void T_GetAgentLocationStatus_Empty()
         {
             //Arrange
             char[,] currentEnvironment = {
@@ -645,8 +705,141 @@ namespace cMovementTest
 
             //Assert
             Assert.AreEqual('*', result);
-
         }
 
+        [TestMethod]
+        public void T_UpdateEnvironment_NoDrop()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] expectedEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            target.UpdateEnvironment(100000, 100000, 100000, 100000);
+
+            //Assert
+            CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
+        }
+
+        [TestMethod]
+        public void T_UpdateEnvironment_DustDropOnEmptyOrDust()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'D', '*' },
+                {'D', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] expectedEnvironment = {
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' }
+            };
+            cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            target.UpdateEnvironment(0, 4000, 100000, 100000);
+
+            //Assert
+            CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
+        }
+
+        [TestMethod]
+        public void T_UpdateEnvironment_JewelDropOnEmptyOrJewel()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', 'J', '*', '*' },
+                {'J', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] expectedEnvironment = {
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' }
+            };
+            cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            target.UpdateEnvironment(100000, 100000, 0, 1000);
+
+            //Assert
+            CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
+        }
+
+        [TestMethod]
+        public void T_UpdateEnvironment_DustDropOnJewel()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' },
+                {'J', 'J', 'J', 'J', 'J' }
+            };
+            char[,] expectedEnvironment = {
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' }
+            };
+            cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            target.UpdateEnvironment(0, 4000, 100000, 100000);
+
+            //Assert
+            CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
+        }
+
+        [TestMethod]
+        public void T_UpdateEnvironment_JewelDropOnDust()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' },
+                {'D', 'D', 'D', 'D', 'D' }
+            };
+            char[,] expectedEnvironment = {
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' },
+                {'B', 'B', 'B', 'B', 'B' }
+            };
+            cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            target.UpdateEnvironment(100000, 100000, 0, 1000);
+
+            //Assert
+            CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
+        }
     }
 }

@@ -48,8 +48,8 @@ namespace AI_TD1
             while (true)
             {
                 Thread.Sleep(1500);
-                environment.UpdateEnvironnement();
-                environment.DrawEnvironnement();
+                environment.UpdateEnvironment();
+                environment.DrawEnvironment();
                 
             }
         }

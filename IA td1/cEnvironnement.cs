@@ -9,10 +9,20 @@ namespace AI_TD1
 {
     public class cEnvironment
     {
-        #region Ctor
-        private const double dustRate = 100000 / 25 / 1;
-        private const double diamondRate = 100000 / 25 / 4;
+        #region Constants
 
+        private const int _dustDropRngMinLimit = 0;
+        private const int _dustDropRngMaxLimit = 100000;
+        private const int _jewelsDropRngMinLimit = 0;
+        private const int _jewelsDropRngMaxLimit = 100000;
+        private const int _boardSize = 5;
+
+        private const double _dustRate = 100000 / 25 / 1;
+        private const double _jewelRate = 100000 / 25 / 4;
+
+        #endregion
+
+        #region Private attributes
         private char[,] environment;
         public char[,] Environment
         {
@@ -25,13 +35,16 @@ namespace AI_TD1
         private int agentPosX;
         private int agentPosY;
 
+        #endregion
+
+        #region Ctor
         public cEnvironment(int agentPosX, int agentPosY)
         {
             this.agentPosX = agentPosX;
             this.agentPosY = agentPosY;
             environment = new char[5, 5];
-            environment = InitialiseEnvironnement();
-            UpdateEnvironnement();
+            environment = InitialiseEnvironment();
+            UpdateEnvironment();
 
         }
 
@@ -44,56 +57,58 @@ namespace AI_TD1
 
         #region Private Methods
 
-        public void UpdateEnvironnement()
+        public void UpdateEnvironment(
+            int dustDropRngMinLimit = _dustDropRngMinLimit,
+            int dustDropRngMaxLimit = _dustDropRngMaxLimit,
+            int jewelsDropRngMinLimit = _jewelsDropRngMinLimit,
+            int jewelsDropRngMaxLimit = _jewelsDropRngMaxLimit
+        )
         {
-            char[,] tempEnvironnemen = Environment;
+            char[,] tmpEnvironment = Environment;
             cSmartAgent tempAgent = new cSmartAgent();
             double rng;
             Random r = new Random();
 
-            for (int i = 0; i < 5; i++)
+            for (int x = 0; x < _boardSize; x++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int y = 0; y < _boardSize; y++)
                 {
                     //testing dust drop
-                    rng = r.Next(0, 100000);
+                    rng = r.Next(dustDropRngMinLimit, dustDropRngMaxLimit);
 
-                    if (rng <= dustRate)
+                    if (rng <= _dustRate)
                     {
-                        if (tempEnvironnemen[i, j] == 'J')
-                            tempEnvironnemen[i, j] = 'B';
+                        if (tmpEnvironment[x, y] == 'J')
+                            tmpEnvironment[x, y] = 'B';
                         else
-                            tempEnvironnemen[i, j] = 'D';
+                            tmpEnvironment[x, y] = 'D';
                     }
 
                     //testing diamond drop
-                    rng = r.Next(0, 100000);
-                    if (rng <= diamondRate)
+                    rng = r.Next(jewelsDropRngMinLimit, jewelsDropRngMaxLimit);
+                    if (rng <= _jewelRate)
                     {
-                        if (tempEnvironnemen[i, j] == 'D')
-                            tempEnvironnemen[i, j] = 'B';
-
+                        if (tmpEnvironment[x, y] == 'D')
+                            tmpEnvironment[x, y] = 'B';
                         else
-                            tempEnvironnemen[i, j] = 'J';
-
+                            tmpEnvironment[x, y] = 'J';
                     }
-
                 }
             }
             tempAgent.AgentCanMoove = true;
 
-            environment = tempEnvironnemen;
+            environment = tmpEnvironment;
         }
 
-        private char[,] InitialiseEnvironnement()
+        private char[,] InitialiseEnvironment()
         {
             char[,] tempEnv = new char[5, 5];
 
-            for (int i = 0; i < 5; i++)
+            for (int x = 0; x < 5; x++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int y = 0; y < 5; y++)
                 {
-                    tempEnv[i, j] = '*';
+                    tempEnv[x, y] = '*';
                 }
             }
             return tempEnv;
@@ -143,6 +158,8 @@ namespace AI_TD1
                 case Actions.Vacuum:
                     Environment[agentPosX, agentPosY] = '*';
                     break;
+                default:
+                    break;
             }
         }
 
@@ -177,13 +194,11 @@ namespace AI_TD1
             return environment[agentPosX, agentPosY];
         }
 
-        public void DrawEnvironnement()
+        public void DrawEnvironment()
         {
             cSmartAgent tempAgent = new cSmartAgent();
             int agentLocationX = tempAgent.LocationX;
             int agentLocationY = tempAgent.LocationY;
-
-
 
             Console.Clear();
             Console.SetCursorPosition(6, 1);
