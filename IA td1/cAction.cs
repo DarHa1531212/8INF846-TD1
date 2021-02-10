@@ -15,9 +15,10 @@ namespace AI_TD1
         public Actions LatestAction { get => latestAction;}
         public int Cost { get => cost; set => cost = value; }
 
-        public cAction(Actions selectedMovement, int cost)
+        public cAction(Actions selectedMovement, int inCost)
         {
             latestAction = selectedMovement;
+            cost = inCost;
         }
 
         public void DoAction(cEnvironment environment) {

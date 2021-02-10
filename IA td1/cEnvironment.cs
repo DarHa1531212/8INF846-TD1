@@ -42,10 +42,9 @@ namespace AI_TD1
         {
             this.agentPosX = agentPosX;
             this.agentPosY = agentPosY;
-            environment = new char[5, 5];
+            environment = new char[_boardSize, _boardSize];
             environment = InitialiseEnvironment();
             UpdateEnvironment();
-
         }
 
         public cEnvironment(int agentPosX, int agentPosY, char[,] env) : this(agentPosX, agentPosY)
@@ -102,11 +101,11 @@ namespace AI_TD1
 
         private char[,] InitialiseEnvironment()
         {
-            char[,] tempEnv = new char[5, 5];
+            char[,] tempEnv = new char[_boardSize, _boardSize];
 
-            for (int x = 0; x < 5; x++)
+            for (int x = 0; x < _boardSize; x++)
             {
-                for (int y = 0; y < 5; y++)
+                for (int y = 0; y < _boardSize; y++)
                 {
                     tempEnv[x, y] = '*';
                 }
@@ -140,6 +139,7 @@ namespace AI_TD1
             switch (move)
             {
                 //TODO add penalty points for vacuuming jewel
+                //TODO add test for action NONE
                 case Actions.Right:
                     agentPosX++;
                     break;
@@ -166,19 +166,18 @@ namespace AI_TD1
         public bool IsPotentialMoveOutOfBounds(Actions potentialAction)
         {
             //todo create test to validate copy of cEnvironment object
-            int bound = 5;
             cEnvironment potentialEnv = CopyEnvironment();
             potentialEnv.MoveAgent(potentialAction);
 
-            return !((potentialEnv.AgentPosX >= 0) && (potentialEnv.AgentPosX < bound)
-                && (potentialEnv.AgentPosY >= 0) && (potentialEnv.AgentPosY < bound));
+            return !((potentialEnv.AgentPosX >= 0) && (potentialEnv.AgentPosX < _boardSize)
+                && (potentialEnv.AgentPosY >= 0) && (potentialEnv.AgentPosY < _boardSize));
         }
 
         public bool HasDust()
         {
-            for (int X = 0; X < 5; X++)
+            for (int X = 0; X < _boardSize; X++)
             {
-                for (int Y = 0; Y < 5; Y++)
+                for (int Y = 0; Y < _boardSize; Y++)
                 {
                     if (Environment[X, Y] == 'D' || Environment[X, Y] == 'B')
                     {
@@ -204,12 +203,12 @@ namespace AI_TD1
             Console.SetCursorPosition(6, 1);
             Console.WriteLine("|0|1|2|3|4|");
 
-            for (int Y = 0; Y < 5; Y++)
+            for (int Y = 0; Y < _boardSize; Y++)
             {
-                Console.SetCursorPosition(5, 2 + Y);
+                Console.SetCursorPosition(_boardSize, 2 + Y);
 
                 Console.Write(Y);
-                for (int X = 0; X < 5; X++)
+                for (int X = 0; X < _boardSize; X++)
                 {
                     Console.Write('|');
                     if (agentLocationY == Y && agentLocationX == X)
