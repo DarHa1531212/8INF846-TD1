@@ -841,5 +841,410 @@ namespace cTests
             //Assert
             CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
         }
+
+        [TestMethod]
+        public void T_operatorEquality_SameObject()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, currentEnvironment);
+            cEnvironment env2 = env1;
+
+            //Act
+            bool areEquals = (env2 == env1) && (env1 == env2);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorEquality_Env1Null()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = null;
+            cEnvironment env2 = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            bool areEquals = (env1 == env2) && (env2 == env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorEquality_Env2Null()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, currentEnvironment);
+            cEnvironment env2 = null;
+
+            //Act
+            bool areEquals = (env1 == env2) && (env2 == env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorEquality_DifferentObjectsWithSameValues()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            cEnvironment env2 = new cEnvironment(2, 2, environment);
+
+            //Act
+            bool areEquals = (env1 == env2) && (env2 == env1);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorEquality_DifferentObjectsWithDifferentValues()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            cEnvironment env2 = new cEnvironment(2, 3, environment);
+
+            //Act
+            bool areEquals = (env1 == env2) && (env2 == env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorInequality_SameObject()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, currentEnvironment);
+            cEnvironment env2 = env1;
+
+            //Act
+            bool areEquals = (env2 != env1) && (env1 != env2);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorInequality_Env1Null()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = null;
+            cEnvironment env2 = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            bool areEquals = (env1 != env2) && (env2 != env1);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorInequality_Env2Null()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, currentEnvironment);
+            cEnvironment env2 = null;
+
+            //Act
+            bool areEquals = (env1 != env2) && (env2 != env1);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorInequality_DifferentObjectsWithSameValues()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            cEnvironment env2 = new cEnvironment(2, 2, environment);
+
+            //Act
+            bool areEquals = (env1 != env2) && (env2 != env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_operatorInequality_DifferentObjectsWithDifferentValues()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            cEnvironment env2 = new cEnvironment(2, 3, environment);
+
+            //Act
+            bool areEquals = (env1 != env2) && (env2 != env1);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_Equals_SameObjects()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            cEnvironment env2 = env1;
+
+            //Act
+            bool areEquals = env1.Equals(env2) && env2.Equals(env1);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_Equals_Null()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env = new cEnvironment(2, 2, environment);
+
+            //Act
+            bool areEquals = env.Equals(null);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_Equals_DifferentObjectsWithSameValues()
+        {
+            //Arrange
+            char[,] environment1 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] environment2 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment1);
+            cEnvironment env2 = new cEnvironment(2, 2, environment2);
+
+            //Act
+            bool areEquals = env1.Equals(env2) && env2.Equals(env1);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_Equals_DifferentEnvironments()
+        {
+            //Arrange
+            char[,] environment1 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] environment2 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', 'D', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment1);
+            cEnvironment env2 = new cEnvironment(2, 2, environment2);
+
+            //Act
+            bool areEquals = env1.Equals(env2) && env2.Equals(env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_Equals_DifferentAgentPosX()
+        {
+            //Arrange
+            char[,] environment1 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] environment2 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(4, 2, environment1);
+            cEnvironment env2 = new cEnvironment(2, 2, environment2);
+
+            //Act
+            bool areEquals = env1.Equals(env2) && env2.Equals(env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_Equals_DifferentAgentPosY()
+        {
+            //Arrange
+            char[,] environment1 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            char[,] environment2 = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment1);
+            cEnvironment env2 = new cEnvironment(2, 4, environment2);
+
+            //Act
+            bool areEquals = env1.Equals(env2) && env2.Equals(env1);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_EqualsToObject_True()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            Object env2 = new cEnvironment(2, 2, environment);
+
+            //Act
+            bool areEquals = env1.Equals(env2);
+
+            //Assert
+            Assert.IsTrue(areEquals);
+        }
+
+        [TestMethod]
+        public void T_EqualsToObject_False()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment env1 = new cEnvironment(2, 2, environment);
+            Object env2 = new char[25];
+
+            //Act
+            bool areEquals = env1.Equals(env2);
+
+            //Assert
+            Assert.IsFalse(areEquals);
+        }
     }
 }

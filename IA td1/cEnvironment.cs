@@ -22,26 +22,22 @@ namespace AI_TD1
 
         #endregion
 
-        #region Private attributes
+        #region Attributes
         private char[,] environment;
         public char[,] Environment
         {
             get { return environment; }
-
         }
-        public int AgentPosX { get => agentPosX; }
-        public int AgentPosY { get => agentPosY; }
-
-        private int agentPosX;
-        private int agentPosY;
+        public int AgentPosX { get; private set; }
+        public int AgentPosY { get; private set; }
 
         #endregion
 
         #region Ctor
         public cEnvironment(int agentPosX, int agentPosY)
         {
-            this.agentPosX = agentPosX;
-            this.agentPosY = agentPosY;
+            this.AgentPosX = agentPosX;
+            this.AgentPosY = agentPosY;
             environment = new char[_boardSize, _boardSize];
             environment = InitialiseEnvironment();
             UpdateEnvironment();
@@ -115,7 +111,7 @@ namespace AI_TD1
 
         private char PickUp()
         {
-            switch (Environment[agentPosX, agentPosY])
+            switch (Environment[AgentPosX, AgentPosY])
             {
 
                 case 'B': return 'D';
@@ -141,22 +137,22 @@ namespace AI_TD1
                 //TODO add penalty points for vacuuming jewel
                 //TODO add test for action NONE
                 case Actions.Right:
-                    agentPosX++;
+                    AgentPosX++;
                     break;
                 case Actions.Left:
-                    agentPosX--;
+                    AgentPosX--;
                     break;
                 case Actions.Up:
-                    agentPosY--;
+                    AgentPosY--;
                     break;
                 case Actions.Down:
-                    agentPosY++;
+                    AgentPosY++;
                     break;
                 case Actions.PickUp:
-                    Environment[agentPosX, agentPosY] = PickUp();
+                    Environment[AgentPosX, AgentPosY] = PickUp();
                     break;
                 case Actions.Vacuum:
-                    Environment[agentPosX, agentPosY] = '*';
+                    Environment[AgentPosX, AgentPosY] = '*';
                     break;
                 default:
                     break;
@@ -190,7 +186,7 @@ namespace AI_TD1
 
         public char GetAgentLocationStatus()
         {
-            return environment[agentPosX, agentPosY];
+            return environment[AgentPosX, AgentPosY];
         }
 
         public void DrawEnvironment()
@@ -226,5 +222,50 @@ namespace AI_TD1
         }
         #endregion
 
+        #region Operators
+        public static bool operator ==(cEnvironment env1, cEnvironment env2)
+        {
+            if (ReferenceEquals(env1, env2))
+            {
+                return true;
+            }
+            if (ReferenceEquals(env1, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(env2, null))
+            {
+                return false;
+            }
+
+            return env1.Equals(env2);
+        }
+
+        public static bool operator !=(cEnvironment env1, cEnvironment env2)
+        {
+            return !(env1 == env2);
+        }
+
+        public bool Equals(cEnvironment other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.AgentPosX.Equals(other.AgentPosX)
+                   && this.AgentPosY.Equals(other.AgentPosY)
+                   && this.Environment.Cast<char>().SequenceEqual(other.Environment.Cast<char>());
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as cEnvironment);
+        }
+        #endregion
     }
 }
