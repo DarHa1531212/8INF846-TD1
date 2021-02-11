@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AI_TD1;
 
-namespace cMovementTest
+namespace cTests
 {
     [TestClass]
     public class cActionTest

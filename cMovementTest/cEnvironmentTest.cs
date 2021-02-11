@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AI_TD1;
 
-namespace cMovementTest
+namespace cTests
 {
     /// <summary>
     /// Description résumée pour cEnvironmentTest
