@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AI_TD1
 {
-    class cAction
+    public class cAction
     {
         private Actions latestAction;
         private int cost;
@@ -23,6 +23,20 @@ namespace AI_TD1
 
         public void DoAction(cEnvironment environment) {
             environment.MoveAgent(latestAction);
+        }
+
+        protected bool Equals(cAction other)
+        {
+            return other.LatestAction == latestAction
+                   && other.Cost == cost;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((cAction)obj);
         }
     }
 }

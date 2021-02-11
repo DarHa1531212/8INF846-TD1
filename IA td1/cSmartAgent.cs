@@ -108,7 +108,8 @@ namespace AI_TD1
             return bestMoveList;
         }
 
-        private List<cAction> FindValidActions(int currentCost, cEnvironment inEnvironment)
+        // TODO : trouver un moyen de la repasser en private sans casser les tests
+        public List<cAction> FindValidActions(int currentCost, cEnvironment inEnvironment)
         {
             int penalty = 5;
             //TODO validate that a given move does not return to a previous position, except for noMouvement

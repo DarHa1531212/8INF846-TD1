@@ -44,8 +44,8 @@ namespace AI_TD1
             };
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
-
-
+            
+            
             cEnvironment mansion = new cEnvironment(0, 0);
 
             //Testing
@@ -54,7 +54,8 @@ namespace AI_TD1
             environmentThread.Start();
 
             cSmartAgent agent = new cSmartAgent(target);
-    
+            
+
         }
 
         public static void UpdateEnvironmentLoop(cEnvironment environment)

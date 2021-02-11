@@ -1,0 +1,4 @@
+--> Added Equals() method for cAction
+--> Added tests for Equals() method of cAction
+--> cSmartAgent.FindValidMoves() is now public (check comment on top)
+--> Added some tests for method FindValidMoves() of cSmartAgent
