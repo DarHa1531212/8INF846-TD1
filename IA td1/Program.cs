@@ -11,6 +11,7 @@ namespace AI_TD1
     {
         static void Main(string[] args)
         {
+
             /* bool validresponse = false;
 
              while (!validresponse) { 
@@ -37,10 +38,10 @@ namespace AI_TD1
             //todo remove testing parameters
             char[,] currentEnvironment = {
                 {'*', '*', '*', '*', '*' },
-                {'D', '*', '*', '*', '*' },
                 {'*', '*', '*', '*', '*' },
                 {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', '*', '*' }
+                {'*', '*', '*', '*', '*' },
+                {'D', '*', '*', '*', '*' }
             };
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 

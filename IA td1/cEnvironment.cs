@@ -169,6 +169,11 @@ namespace AI_TD1
                 && (potentialEnv.AgentPosY >= 0) && (potentialEnv.AgentPosY < _boardSize));
         }
 
+        public bool IsClean()
+        {
+            return !(HasDust() || HasJewels());
+        }
+
         public bool HasDust()
         {
             for (int X = 0; X < _boardSize; X++)
@@ -184,17 +189,28 @@ namespace AI_TD1
             return false;
         }
 
+        public bool HasJewels()
+        {
+            for (int X = 0; X < _boardSize; X++)
+            {
+                for (int Y = 0; Y < _boardSize; Y++)
+                {
+                    if (Environment[X, Y] == 'J' || Environment[X, Y] == 'B')
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public char GetAgentLocationStatus()
         {
             return environment[AgentPosX, AgentPosY];
         }
 
         public void DrawEnvironment()
-        {
-            cSmartAgent tempAgent = new cSmartAgent();
-            int agentLocationX = tempAgent.LocationX;
-            int agentLocationY = tempAgent.LocationY;
-
+        {          
             Console.Clear();
             Console.SetCursorPosition(6, 1);
             Console.WriteLine("|0|1|2|3|4|");
@@ -207,7 +223,7 @@ namespace AI_TD1
                 for (int X = 0; X < _boardSize; X++)
                 {
                     Console.Write('|');
-                    if (agentLocationY == Y && agentLocationX == X)
+                    if (AgentPosY == Y && AgentPosX == X)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }

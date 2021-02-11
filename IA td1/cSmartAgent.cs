@@ -12,40 +12,24 @@ namespace AI_TD1
         Right, Left, Up, Down, PickUp, Vacuum, None
     }
 
-    //TODO clean up diamonds too
     public class cSmartAgent
     {
-
-        private static int locationX;
-        private static int locationY;
-
         private static bool agentCanMove = false;
 
         private int actualCost = 0;
 
-        public int LocationX
-        {
-            get { return locationX; }
-        }
 
         public bool AgentCanMoove
         {
             set { agentCanMove = value; }
         }
 
-        public int LocationY
-        {
-            get { return locationY; }
-        }
-
-
         public cSmartAgent(cEnvironment mansion)
         {
             List<cAction> actionsList = new List<cAction>();
             cAction initialSetup = new cAction(Actions.None, 0);
             actionsList.Add(initialSetup);
-            List<int[]> emptyPosList = new List<int[]>();
-
+    
             while (true)
             {
                 if (agentCanMove)
@@ -66,46 +50,46 @@ namespace AI_TD1
         { }
 
 
-        private List<cAction> RecursiveDS(List<cAction> positionList, cEnvironment inEnvironnement, int depth) 
+        private List<cAction> RecursiveDS(List<cAction> actionList, cEnvironment inEnvironnement, int depth) 
         {
             int maxDepth = 8;
             if (depth == maxDepth)
             {
-                return positionList;
+                return actionList;
             }
             
             //test success
-            if (!inEnvironnement.HasDust())
+            if (inEnvironnement.IsClean())
             {
-                return positionList;
+                actionList.Last().Cost -= 25;
+                return actionList;
             }
-   
-            Actions chosenAction;
 
-            int currentCost = positionList.Last().Cost;
+            int currentCost = actionList.Last().Cost;
 
-            List<cAction> potentialMoves = FindValidActions(currentCost, inEnvironnement);
+            List<cAction> potentialAction = FindValidActions(currentCost, inEnvironnement);
 
-            List<cAction> bestMoveList = new List<cAction>();
-            int cheapestMove = int.MaxValue;
+            List<cAction> bestActionList = new List<cAction>();
+            int cheapestCost = int.MaxValue;
 
-            foreach (cAction move in potentialMoves)
+            foreach (cAction action in potentialAction)
             {
-                cEnvironment outEnvironnement = inEnvironnement.CopyEnvironment();
-                List<cAction> tempList = positionList;
-                tempList.Add(move);
-                move.DoAction(outEnvironnement);
+                cEnvironment tempEnv = inEnvironnement.CopyEnvironment(); // Duplication de l'environnement réel actuel
+                List<cAction> tempActionList = new List<cAction>(actionList); // Liste d'actions réelles actuelles
+                tempActionList.Add(action); // On ajoute le mouvement
+                action.DoAction(tempEnv); // On simule l'environnement après mouvement
 
-                List<cAction> resultList = RecursiveDS(tempList, outEnvironnement, depth +1);
-                int cost = resultList.Last().Cost;
+                List<cAction> resultList =  RecursiveDS(tempActionList, tempEnv, depth + 1);
 
-                if (cost < cheapestMove)
-                {
-                    bestMoveList = resultList;
-                    cheapestMove = resultList.Last().Cost;
+                // Déterminer le meilleur mouvement
+                if (resultList.Last().Cost < cheapestCost){
+                    cheapestCost = resultList.Last().Cost;
+                    bestActionList = tempActionList;
                 }
+               
             }
-            return bestMoveList;
+
+            return bestActionList;
         }
 
         // TODO : trouver un moyen de la repasser en private sans casser les tests
@@ -161,6 +145,9 @@ namespace AI_TD1
             {
                 potentialMoves.Add(movementUp);
             }
+
+            cAction movementNone = new cAction(Actions.None, currentCost);
+            potentialMoves.Add(movementNone);
 
             return potentialMoves;
         }
