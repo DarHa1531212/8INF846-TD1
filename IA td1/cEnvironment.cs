@@ -282,6 +282,17 @@ namespace AI_TD1
         {
             return Equals(obj as cEnvironment);
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = AgentPosX.GetHashCode();
+                hashCode = (hashCode * 397) ^ AgentPosY.GetHashCode();
+                hashCode = (hashCode * 397) ^ environment.GetHashCode();
+                return hashCode;
+            }
+        }
         #endregion
     }
 }

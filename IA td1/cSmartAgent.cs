@@ -18,11 +18,13 @@ namespace AI_TD1
 
         private int actualCost = 0;
 
-
         public bool AgentCanMoove
         {
             set { agentCanMove = value; }
         }
+
+        private int cheapestCost = int.MaxValue;
+        private List<cAction> bestActionList = new List<cAction>();
 
         public cSmartAgent(cEnvironment mansion)
         {
@@ -34,7 +36,12 @@ namespace AI_TD1
             {
                 if (agentCanMove)
                 {
-                    List<cAction> movements = RecursiveDS(actionsList, mansion, 0);
+                    bestActionList = new List<cAction>();
+                    bestActionList.Add(new cAction(Actions.None, 0));
+                    cheapestCost = int.MaxValue;
+
+                    List<cEnvironment> forbiddenStates = new List<cEnvironment>();
+                    List<cAction> movements = RecursiveDS(actionsList, mansion, 0, forbiddenStates);
                     cAction firstMovementToExecute = movements.ElementAt(1);
                     actualCost = firstMovementToExecute.Cost;
 
@@ -47,21 +54,28 @@ namespace AI_TD1
         }
 
         public cSmartAgent()
-        { }
-
-
-        private List<cAction> RecursiveDS(List<cAction> actionList, cEnvironment inEnvironnement, int depth) 
         {
-            int maxDepth = 8;
+            bestActionList.Add(new cAction(Actions.None, 0));
+        }
+
+
+        public List<cAction> RecursiveDS(
+            List<cAction> actionList, 
+            cEnvironment inEnvironnement, 
+            int depth, 
+            List<cEnvironment> forbiddenStates
+        ) {
+            /*int maxDepth = int.MaxValue;
             if (depth == maxDepth)
             {
                 return actionList;
-            }
+            }*/
             
             //test success
             if (inEnvironnement.IsClean())
             {
                 actionList.Last().Cost -= 25;
+                actionList.Add(new cAction(Actions.None, actionList.Last().Cost));
                 return actionList;
             }
 
@@ -69,8 +83,9 @@ namespace AI_TD1
 
             List<cAction> potentialAction = FindValidActions(currentCost, inEnvironnement);
 
-            List<cAction> bestActionList = new List<cAction>();
-            int cheapestCost = int.MaxValue;
+            /*List<cAction> bestActionList = new List<cAction>();
+            bestActionList.Add(new cAction(Actions.None, 0));
+            int cheapestCost = int.MaxValue;*/
 
             foreach (cAction action in potentialAction)
             {
@@ -78,15 +93,19 @@ namespace AI_TD1
                 List<cAction> tempActionList = new List<cAction>(actionList); // Liste d'actions réelles actuelles
                 tempActionList.Add(action); // On ajoute le mouvement
                 action.DoAction(tempEnv); // On simule l'environnement après mouvement
-
-                List<cAction> resultList =  RecursiveDS(tempActionList, tempEnv, depth + 1);
-
-                // Déterminer le meilleur mouvement
-                if (resultList.Last().Cost < cheapestCost){
-                    cheapestCost = resultList.Last().Cost;
-                    bestActionList = tempActionList;
+                
+                if (!forbiddenStates.Contains(tempEnv))
+                {
+                    forbiddenStates.Add(tempEnv);
+                    List<cAction> resultList = RecursiveDS(tempActionList, tempEnv, depth + 1, forbiddenStates);
+                    
+                    // Déterminer le meilleur mouvement
+                    if (resultList.Last().Cost < cheapestCost)
+                    {
+                        cheapestCost = resultList.Last().Cost;
+                        bestActionList = tempActionList;
+                    }
                 }
-               
             }
 
             return bestActionList;
@@ -95,7 +114,8 @@ namespace AI_TD1
         // TODO : trouver un moyen de la repasser en private sans casser les tests
         public List<cAction> FindValidActions(int currentCost, cEnvironment inEnvironment)
         {
-            int penalty = 5;
+            int penaltyVacuumJewel = 12;
+            int bonusVacuumDust = -9;
             //TODO validate that a given move does not return to a previous position, except for noMouvement
 
 
@@ -104,7 +124,7 @@ namespace AI_TD1
             if (inEnvironment.GetAgentLocationStatus() == 'B')
             {
                 //a given action has a cost of 1, if the agent vacuums on Both, cost points are added as a penalty for vacuuming a jewel
-                cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1 + penalty);
+                cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1 + bonusVacuumDust + penaltyVacuumJewel);
                 cAction pickupAction = new cAction(Actions.PickUp, currentCost + 1);
                 potentialMoves.Add(vacuumAction);
                 potentialMoves.Add(pickupAction);
@@ -112,7 +132,7 @@ namespace AI_TD1
 
             if (inEnvironment.GetAgentLocationStatus() == 'D')
             {
-                cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1);
+                cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1 + bonusVacuumDust);
                 potentialMoves.Add(vacuumAction);
             }
 
@@ -145,9 +165,6 @@ namespace AI_TD1
             {
                 potentialMoves.Add(movementUp);
             }
-
-            cAction movementNone = new cAction(Actions.None, currentCost);
-            potentialMoves.Add(movementNone);
 
             return potentialMoves;
         }

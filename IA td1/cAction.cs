@@ -38,5 +38,15 @@ namespace AI_TD1
             if (obj.GetType() != this.GetType()) return false;
             return Equals((cAction)obj);
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = cost.GetHashCode();
+                hashCode = (hashCode * 397) ^ latestAction.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }
