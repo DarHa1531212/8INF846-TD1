@@ -1034,6 +1034,8 @@ namespace cTests
         [TestMethod]
         public void T_RecursiveDS_Dusts()
         {
+            //Note, if max depth in recursive ds function is shorter than the list, this unit test will fail
+
             //Arrange
             char[,] env = {
                 {'*', '*', '*', '*', '*' },

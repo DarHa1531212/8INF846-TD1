@@ -12,7 +12,8 @@ namespace AI_TD1
         static void Main(string[] args)
         {
 
-            /* bool validresponse = false;
+             bool validresponse = false;
+            bool isInformed = false;
 
              while (!validresponse) { 
                  Console.WriteLine("1 pour agent non informé");
@@ -21,21 +22,23 @@ namespace AI_TD1
 
                  if (result == 49)
                  {
-                     Console.WriteLine("uninformed");
+                    isInformed = false;
                      validresponse = true;
                  }
                  else if (result == 50)
                  {
-                     Console.WriteLine("Informed");
-                     validresponse = true;
+                    isInformed = true;
+                    validresponse = true;
                  }
                  else
                  {
-                     Console.WriteLine("Wrong carracter, try again");
+                     Console.WriteLine("Wrong character, try again");
                  }
-             }*/
+             }
 
             //todo remove testing parameters
+
+
             char[,] env = {
                 {'*', '*', '*', '*', '*' },
                 {'*', '*', '*', '*', '*' },
@@ -54,7 +57,7 @@ namespace AI_TD1
             Thread environmentThread = new Thread(() => UpdateEnvironmentLoop(target));
             environmentThread.Start();
 
-            cSmartAgent agent = new cSmartAgent(target);
+            cSmartAgent agent = new cSmartAgent(target, isInformed);
 
 
         }

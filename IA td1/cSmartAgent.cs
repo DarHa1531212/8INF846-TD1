@@ -23,18 +23,29 @@ namespace AI_TD1
             set { agentCanMove = value; }
         }
 
-        public cSmartAgent(cEnvironment mansion)
+        public cSmartAgent(cEnvironment mansion, bool isInformed)
         {
             List<cAction> actionsList = new List<cAction>();
             cAction initialSetup = new cAction(Actions.None, 0);
             actionsList.Add(initialSetup);
 
+            
             while (true)
             {
                 if (agentCanMove)
                 {
+                    List<cAction> movements = new List<cAction>();
+
                     List<cEnvironment> forbiddenStates = new List<cEnvironment>();
-                    List<cAction> movements = RecursiveDS(actionsList, mansion, 0, forbiddenStates);
+                    if (isInformed)
+                    {
+                        //exploration informée
+                    }
+                    else
+                    {
+                        movements = RecursiveDS(actionsList, mansion, 0, forbiddenStates);
+
+                    }
                     cAction firstMovementToExecute = movements.ElementAt(1);
                     actualCost += firstMovementToExecute.DoAction(mansion);
 
