@@ -21,8 +21,9 @@ namespace AI_TD1
             cost = inCost;
         }
 
-        public void DoAction(cEnvironment environment) {
-            environment.MoveAgent(latestAction);
+        public int DoAction(cEnvironment environment) {
+           return environment.MoveAgent(latestAction);
+           
         }
 
         protected bool Equals(cAction other)

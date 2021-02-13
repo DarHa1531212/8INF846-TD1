@@ -23,6 +23,8 @@ namespace AI_TD1
         #endregion
 
         #region Attributes
+        private const int penaltyVacuumJewel = 12;
+        private const int bonusVacuumDust = -9;
         private char[,] environment;
         public char[,] Environment
         {
@@ -95,6 +97,31 @@ namespace AI_TD1
             environment = tmpEnvironment;
         }
 
+        private bool IsJewelOnAgentPosition()
+        {
+            if (Environment[AgentPosX, AgentPosY] == 'J' || Environment[AgentPosX, AgentPosY] == 'B')
+                return true;
+            return false;
+        }
+
+
+        private bool IsDustOnAgentPosition()
+        {
+            if (Environment[AgentPosX, AgentPosY] == 'D' || Environment[AgentPosX, AgentPosY] == 'B')
+                return true;
+            return false;
+        }
+        private int CountVacuumActionCost()
+        {
+            int cost = 1;
+            if (IsJewelOnAgentPosition())
+                cost += penaltyVacuumJewel;
+            if (IsDustOnAgentPosition())
+                cost -= bonusVacuumDust;
+
+            return cost;
+        }
+
         private char[,] InitialiseEnvironment()
         {
             char[,] tempEnv = new char[_boardSize, _boardSize];
@@ -130,38 +157,36 @@ namespace AI_TD1
 
         }
 
-        public void MoveAgent(Actions move)
+        public int MoveAgent(Actions move)
         {
             switch (move)
             {
-                //TODO add penalty points for vacuuming jewel
                 //TODO add test for action NONE
                 case Actions.Right:
                     AgentPosX++;
-                    break;
+                    return 1;
                 case Actions.Left:
                     AgentPosX--;
-                    break;
+                    return 1;
                 case Actions.Up:
                     AgentPosY--;
-                    break;
+                    return 1;
                 case Actions.Down:
                     AgentPosY++;
-                    break;
+                    return 1;
                 case Actions.PickUp:
                     Environment[AgentPosX, AgentPosY] = PickUp();
-                    break;
+                    return 1;
                 case Actions.Vacuum:
                     Environment[AgentPosX, AgentPosY] = '*';
-                    break;
-                default:
-                    break;
+                    return CountVacuumActionCost();
+                default: // default action is None
+                    return 0;
             }
         }
 
         public bool IsPotentialMoveOutOfBounds(Actions potentialAction)
         {
-            //todo create test to validate copy of cEnvironment object
             cEnvironment potentialEnv = CopyEnvironment();
             potentialEnv.MoveAgent(potentialAction);
 
@@ -210,7 +235,7 @@ namespace AI_TD1
         }
 
         public void DrawEnvironment()
-        {          
+        {
             Console.Clear();
             Console.SetCursorPosition(6, 1);
             Console.WriteLine("|0|1|2|3|4|");
@@ -227,7 +252,7 @@ namespace AI_TD1
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                     }
-                    Console.Write(Environment[Y, X]);
+                    Console.Write(Environment[X, Y]);
                     Console.ForegroundColor = ConsoleColor.White;
 
                 }

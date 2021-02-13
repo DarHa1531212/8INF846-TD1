@@ -23,30 +23,20 @@ namespace AI_TD1
             set { agentCanMove = value; }
         }
 
-        private int cheapestCost = int.MaxValue;
-        private List<cAction> bestActionList = new List<cAction>();
-
         public cSmartAgent(cEnvironment mansion)
         {
             List<cAction> actionsList = new List<cAction>();
             cAction initialSetup = new cAction(Actions.None, 0);
             actionsList.Add(initialSetup);
-    
+
             while (true)
             {
                 if (agentCanMove)
                 {
-                    bestActionList = new List<cAction>();
-                    bestActionList.Add(new cAction(Actions.None, 0));
-                    cheapestCost = int.MaxValue;
-
                     List<cEnvironment> forbiddenStates = new List<cEnvironment>();
                     List<cAction> movements = RecursiveDS(actionsList, mansion, 0, forbiddenStates);
                     cAction firstMovementToExecute = movements.ElementAt(1);
-                    actualCost = firstMovementToExecute.Cost;
-
-                    //TODO: Act on first movement to execute
-                    firstMovementToExecute.DoAction(mansion);
+                    actualCost += firstMovementToExecute.DoAction(mansion);
 
                     agentCanMove = false;
                 }
@@ -55,22 +45,16 @@ namespace AI_TD1
 
         public cSmartAgent()
         {
-            bestActionList.Add(new cAction(Actions.None, 0));
         }
 
 
         public List<cAction> RecursiveDS(
-            List<cAction> actionList, 
-            cEnvironment inEnvironnement, 
-            int depth, 
+            List<cAction> actionList,
+            cEnvironment inEnvironnement,
+            int depth,
             List<cEnvironment> forbiddenStates
-        ) {
-            /*int maxDepth = int.MaxValue;
-            if (depth == maxDepth)
-            {
-                return actionList;
-            }*/
-            
+        )
+        {
             //test success
             if (inEnvironnement.IsClean())
             {
@@ -79,33 +63,45 @@ namespace AI_TD1
                 return actionList;
             }
 
+            //todo extract function and unit test
+            /*if (forbiddenStates.Contains(inEnvironnement))
+            {
+                return actionList;
+            }
+            forbiddenStates.Add(inEnvironnement); */
+
+            if (depth == 10)
+            {
+                return actionList;
+            }
+
             int currentCost = actionList.Last().Cost;
 
             List<cAction> potentialAction = FindValidActions(currentCost, inEnvironnement);
 
-            /*List<cAction> bestActionList = new List<cAction>();
-            bestActionList.Add(new cAction(Actions.None, 0));
-            int cheapestCost = int.MaxValue;*/
+            List<cAction> bestActionList = new List<cAction>();
+
+            int cheapestCost = int.MaxValue;
 
             foreach (cAction action in potentialAction)
             {
-                cEnvironment tempEnv = inEnvironnement.CopyEnvironment(); // Duplication de l'environnement réel actuel
-                List<cAction> tempActionList = new List<cAction>(actionList); // Liste d'actions réelles actuelles
-                tempActionList.Add(action); // On ajoute le mouvement
-                action.DoAction(tempEnv); // On simule l'environnement après mouvement
-                
-                if (!forbiddenStates.Contains(tempEnv))
+
+                cEnvironment simulatedActionEnvironment = inEnvironnement.CopyEnvironment(); // Duplication de l'environnement réel actuel             
+                action.DoAction(simulatedActionEnvironment); // L'environment après avoir fait l'action, supposons qu'on a aspiré, la poussière ne sera plus là
+
+                List<cAction> simulatedActionList = new List<cAction>(actionList); // Liste d'actions réelles actuelles
+                simulatedActionList.Add(action); // On ajoute le mouvement à simuler. 
+
+                List<cAction> resultList = new List<cAction>(RecursiveDS(simulatedActionList, simulatedActionEnvironment, depth + 1, forbiddenStates));
+
+                // Déterminer la meilleur action
+                if (resultList.Last().Cost < cheapestCost)
                 {
-                    forbiddenStates.Add(tempEnv);
-                    List<cAction> resultList = RecursiveDS(tempActionList, tempEnv, depth + 1, forbiddenStates);
-                    
-                    // Déterminer le meilleur mouvement
-                    if (resultList.Last().Cost < cheapestCost)
-                    {
-                        cheapestCost = resultList.Last().Cost;
-                        bestActionList = tempActionList;
-                    }
+                    cheapestCost = resultList.Last().Cost;
+                    bestActionList = resultList;
                 }
+
+
             }
 
             return bestActionList;
@@ -116,7 +112,6 @@ namespace AI_TD1
         {
             int penaltyVacuumJewel = 12;
             int bonusVacuumDust = -9;
-            //TODO validate that a given move does not return to a previous position, except for noMouvement
 
 
             List<cAction> potentialMoves = new List<cAction>();

@@ -36,17 +36,17 @@ namespace AI_TD1
              }*/
 
             //todo remove testing parameters
-            char[,] currentEnvironment = {
+            char[,] env = {
                 {'*', '*', '*', '*', '*' },
                 {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'D', '*' },
                 {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', '*', '*' },
-                {'D', '*', '*', '*', '*' }
+                {'*', '*', '*', '*', '*' }
             };
-            cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
+            cEnvironment target = new cEnvironment(3, 3, env);
 
-            
-            
+
+
             cEnvironment mansion = new cEnvironment(0, 0);
 
             //Testing
@@ -55,7 +55,7 @@ namespace AI_TD1
             environmentThread.Start();
 
             cSmartAgent agent = new cSmartAgent(target);
-            
+
 
         }
 
@@ -70,7 +70,7 @@ namespace AI_TD1
                 environment.UpdateEnvironment(100000, 100000, 100000, 100000);
 
                 environment.DrawEnvironment();
-                
+
             }
         }
     }
