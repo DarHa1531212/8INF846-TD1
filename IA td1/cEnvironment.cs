@@ -54,21 +54,6 @@ namespace AI_TD1
 
         #region Private Methods
 
-        private int ManhattanDistance() {
-            int distanceSum = 0;
-            for (int i = 0; i < _boardSize; ++i)
-            {
-                for (int j = 0; j < _boardSize; ++j)
-                {
-                    if(environment[j, i] != '*')
-                    {
-                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
-                    }
-                }
-            }
-            return distanceSum;
-        }
-
         public void UpdateEnvironment(
             int dustDropRngMinLimit = _dustDropRngMinLimit,
             int dustDropRngMaxLimit = _dustDropRngMaxLimit,
@@ -275,6 +260,22 @@ namespace AI_TD1
                 Console.WriteLine();
             }
 
+        }
+
+        public int ManhattanDistance()
+        {
+            int distanceSum = 0;
+            for (int i = 0; i < _boardSize; ++i)
+            {
+                for (int j = 0; j < _boardSize; ++j)
+                {
+                    if (environment[j, i] != '*')
+                    {
+                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
+                    }
+                }
+            }
+            return distanceSum;
         }
         #endregion
 
