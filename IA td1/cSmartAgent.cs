@@ -254,7 +254,7 @@ namespace AI_TD1
     )
         {
             //test success
-            if (inEnvironnement.HasDust())
+            if (inEnvironnement.IsClean())
             {
                 actionList.Last().Cost -= 25;
                 actionList.Add(new cAction(Actions.None, actionList.Last().Cost));
