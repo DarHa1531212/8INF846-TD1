@@ -1059,8 +1059,8 @@ namespace cTests
             expectedActions.Add(new cAction(Actions.Vacuum, -18));
             expectedActions.Add(new cAction(Actions.Right, -17));
             expectedActions.Add(new cAction(Actions.Down, -16));
-            expectedActions.Add(new cAction(Actions.Vacuum, -16 - 9 - 25));
-            expectedActions.Add(new cAction(Actions.None, -16 - 9 - 25));
+            expectedActions.Add(new cAction(Actions.Vacuum, -15 - 9 - 25));
+            expectedActions.Add(new cAction(Actions.None, -15 - 9 - 25));
 
             //Act
             List<cAction> actionsList = new List<cAction>();

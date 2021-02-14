@@ -54,7 +54,7 @@ namespace AI_TD1
 
         #region Private Methods
 
-        private int Heuristic() {
+        /*private int Heuristic() {
             int distanceSum = 0;
             foreach(object dust in listOfDusts) {
                 distanceSum += Math.Abs(AgentPosX - dust.posX) + Math.Abs(AgentPosY - dust.posY);
@@ -63,7 +63,7 @@ namespace AI_TD1
                 distanceSum += Math.Abs(AgentPosX - jewel.posX) + Math.Abs(AgentPosY - jewel.posY);
             }
             return distanceSum;
-        }
+        }*/
 
         public void UpdateEnvironment(
             int dustDropRngMinLimit = _dustDropRngMinLimit,
