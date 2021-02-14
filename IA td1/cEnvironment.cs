@@ -54,16 +54,20 @@ namespace AI_TD1
 
         #region Private Methods
 
-        /*private int Heuristic() {
+        private int ManhattanDistance() {
             int distanceSum = 0;
-            foreach(object dust in listOfDusts) {
-                distanceSum += Math.Abs(AgentPosX - dust.posX) + Math.Abs(AgentPosY - dust.posY);
-            }
-            foreach(object jewel in listOfDusts) {
-                distanceSum += Math.Abs(AgentPosX - jewel.posX) + Math.Abs(AgentPosY - jewel.posY);
+            for (int i = 0; i < _boardSize; ++i)
+            {
+                for (int j = 0; j < _boardSize; ++j)
+                {
+                    if(environment[j, i] != '*')
+                    {
+                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
+                    }
+                }
             }
             return distanceSum;
-        }*/
+        }
 
         public void UpdateEnvironment(
             int dustDropRngMinLimit = _dustDropRngMinLimit,
