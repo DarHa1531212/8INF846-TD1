@@ -185,7 +185,7 @@ namespace AI_TD1
                 );
                 vacuum.Environment.MoveAgent(vacuum.Action);
                 successors.Add(vacuum);
-
+                //TODO : ajouter récompense
                 cNode pickup = new cNode(
                     parent.Environment,
                     Actions.PickUp,
