@@ -96,8 +96,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
@@ -146,8 +146,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -195,8 +195,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -244,8 +244,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -292,8 +292,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
@@ -339,8 +339,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
@@ -387,8 +387,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
@@ -434,8 +434,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
@@ -482,8 +482,8 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 9));
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 + 12 - 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
@@ -525,7 +525,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
@@ -566,7 +566,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -606,7 +606,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -646,7 +646,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -685,7 +685,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
@@ -723,7 +723,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
@@ -762,7 +762,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
@@ -800,7 +800,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
@@ -839,7 +839,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 9));
+            expectedNodes.Add(new cNode(vacuumedEnvironment, Actions.Vacuum, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
@@ -881,7 +881,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
@@ -922,7 +922,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -962,7 +962,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -1002,7 +1002,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
@@ -1041,7 +1041,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
@@ -1079,7 +1079,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
@@ -1118,7 +1118,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
@@ -1156,7 +1156,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(rightEnvironment, Actions.Right, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
@@ -1195,7 +1195,7 @@ namespace cTests
             cNode baseNode = new cNode(environment);
 
             List<cNode> expectedNodes = new List<cNode>();
-            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1));
+            expectedNodes.Add(new cNode(pickedUpEnvironment, Actions.PickUp, 1 - 1));
             expectedNodes.Add(new cNode(leftEnvironment, Actions.Left, 1));
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
@@ -1536,7 +1536,199 @@ namespace cTests
             Assert.AreEqual(expectedAction, resultAction);
         }
 
+        [TestMethod]
+        public void T_AStar_OnOneDust()
+        {
+            char[,] env = {
+                {'D', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Vacuum;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_OnOneJewel()
+        {
+            char[,] env = {
+                {'J', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.PickUp;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_OnBoth()
+        {
+            char[,] env = {
+                {'B', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.PickUp;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_CleanBoard()
+        {
+            char[,] env = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.None;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_RoomNextToDust()
+        {
+            char[,] env = {
+                {'*', 'D', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Down;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_RoomNextToJewel()
+        {
+            char[,] env = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', 'J', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(3, 3, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Up;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_RoomNextToBoth()
+        {
+            char[,] env = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', 'B' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(1, 4, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Right;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_LineOfDusts()
+        {
+            char[,] env = {
+                {'*', '*', '*', '*', '*' },
+                {'D', '*', '*', '*', '*' },
+                {'D', '*', '*', '*', '*' },
+                {'D', '*', '*', '*', '*' },
+                {'D', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Right;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
 
 
+        [TestMethod]
+        public void T_AStar_Dusts()
+        {
+
+            //Arrange
+            char[,] env = {
+                {'*', '*', '*', '*', '*' },
+                {'D', '*', 'D', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'D', '*' },
+                {'*', '*', '*', '*', 'D' }
+            };
+            cEnvironment environment = new cEnvironment(0, 0, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Right;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_LineOfDustsWithBacktrack()
+        {
+            //Arrange
+            char[,] env = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'D', '*', 'D', 'D', 'D' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment environment = new cEnvironment(2, 1, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Left;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
     }
+
 }

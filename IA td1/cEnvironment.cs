@@ -11,31 +11,86 @@ namespace AI_TD1
     {
         #region Constants
 
+        /// <summary>
+        /// The dust drop RNG minimum limit
+        /// </summary>
         private const int _dustDropRngMinLimit = 0;
+        /// <summary>
+        /// The dust drop RNG maximum limit
+        /// </summary>
         private const int _dustDropRngMaxLimit = 100000;
+        /// <summary>
+        /// The jewels drop RNG minimum limit
+        /// </summary>
         private const int _jewelsDropRngMinLimit = 0;
+        /// <summary>
+        /// The jewels drop RNG maximum limit
+        /// </summary>
         private const int _jewelsDropRngMaxLimit = 100000;
+        /// <summary>
+        /// The board size
+        /// </summary>
         private const int _boardSize = 5;
 
+        /// <summary>
+        /// The dust rate
+        /// </summary>
         private const double _dustRate = 100000 / 25 / 1;
+        /// <summary>
+        /// The jewel rate
+        /// </summary>
         private const double _jewelRate = 100000 / 25 / 4;
 
         #endregion
 
-        #region Attributes
+        #region Attributes        
+        /// <summary>
+        /// The penalty when vacuuming the jewel
+        /// </summary>
         private const int penaltyVacuumJewel = 12;
-        private const int bonusVacuumDust = -9;
+        /// <summary>
+        /// The dust vacuum bonus
+        /// </summary>
+        private const int bonusVacuumDust = -1;
+
+        /// <summary>
+        /// The environment
+        /// </summary>
         private char[,] environment;
+
+        /// <summary>
+        /// Gets the environment.
+        /// </summary>
+        /// <value>
+        /// The environment.
+        /// </value>
         public char[,] Environment
         {
             get { return environment; }
         }
+        /// <summary>
+        /// Gets the agent position x.
+        /// </summary>
+        /// <value>
+        /// The agent position x.
+        /// </value>
         public int AgentPosX { get; private set; }
+        /// <summary>
+        /// Gets the agent position y.
+        /// </summary>
+        /// <value>
+        /// The agent position y.
+        /// </value>
         public int AgentPosY { get; private set; }
 
         #endregion
 
-        #region Ctor
+        #region Ctor        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="cEnvironment"/> class.
+        /// </summary>
+        /// <param name="agentPosX">The agent position x.</param>
+        /// <param name="agentPosY">The agent position y.</param>
         public cEnvironment(int agentPosX, int agentPosY)
         {
             this.AgentPosX = agentPosX;
@@ -45,6 +100,12 @@ namespace AI_TD1
             UpdateEnvironment();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="cEnvironment"/> class.
+        /// </summary>
+        /// <param name="agentPosX">The agent position x.</param>
+        /// <param name="agentPosY">The agent position y.</param>
+        /// <param name="env">The environment.</param>
         public cEnvironment(int agentPosX, int agentPosY, char[,] env) : this(agentPosX, agentPosY)
         {
             Array.Copy(env, this.Environment, env.GetLength(0) * env.GetLength(1));
@@ -54,6 +115,13 @@ namespace AI_TD1
 
         #region Private Methods
 
+        /// <summary>
+        /// Updates the environment.
+        /// </summary>
+        /// <param name="dustDropRngMinLimit">The dust drop RNG minimum limit.</param>
+        /// <param name="dustDropRngMaxLimit">The dust drop RNG maximum limit.</param>
+        /// <param name="jewelsDropRngMinLimit">The jewels drop RNG minimum limit.</param>
+        /// <param name="jewelsDropRngMaxLimit">The jewels drop RNG maximum limit.</param>
         public void UpdateEnvironment(
             int dustDropRngMinLimit = _dustDropRngMinLimit,
             int dustDropRngMaxLimit = _dustDropRngMaxLimit,
@@ -97,6 +165,12 @@ namespace AI_TD1
             environment = tmpEnvironment;
         }
 
+        /// <summary>
+        /// Determines whether there is a jewel on the agent position.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if there is a jewel on the agent position; otherwise, <c>false</c>.
+        /// </returns>
         private bool IsJewelOnAgentPosition()
         {
             if (Environment[AgentPosX, AgentPosY] == 'J' || Environment[AgentPosX, AgentPosY] == 'B')
@@ -105,12 +179,22 @@ namespace AI_TD1
         }
 
 
+        /// <summary>
+        /// Determines whether there is dust on agent position.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if there is dust on agent position; otherwise, <c>false</c>.
+        /// </returns>
         private bool IsDustOnAgentPosition()
         {
             if (Environment[AgentPosX, AgentPosY] == 'D' || Environment[AgentPosX, AgentPosY] == 'B')
                 return true;
             return false;
         }
+        /// <summary>
+        /// Counts the vacuum action cost.
+        /// </summary>
+        /// <returns>The vacuum action cost.</returns>
         private int CountVacuumActionCost()
         {
             int cost = 1;
@@ -122,6 +206,10 @@ namespace AI_TD1
             return cost;
         }
 
+        /// <summary>
+        /// Initialises the environment.
+        /// </summary>
+        /// <returns>The environment</returns>
         private char[,] InitialiseEnvironment()
         {
             char[,] tempEnv = new char[_boardSize, _boardSize];
@@ -136,6 +224,10 @@ namespace AI_TD1
             return tempEnv;
         }
 
+        /// <summary>
+        /// Picks up.
+        /// </summary>
+        /// <returns>The environment's state after pick up</returns>
         private char PickUp()
         {
             switch (Environment[AgentPosX, AgentPosY])
@@ -151,17 +243,25 @@ namespace AI_TD1
 
         #region Public Methods
 
+        /// <summary>
+        /// Copies the environment.
+        /// </summary>
+        /// <returns>The copied environment</returns>
         public cEnvironment CopyEnvironment()
         {
             return new cEnvironment(AgentPosX, AgentPosY, environment);
 
         }
 
-        public int MoveAgent(Actions move)
+        /// <summary>
+        /// The agent does an action
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>The cost of the action</returns>
+        public int DoAgentAction(Actions action)
         {
-            switch (move)
+            switch (action)
             {
-                //TODO add test for action NONE
                 case Actions.Right:
                     AgentPosX++;
                     return 1;
@@ -185,20 +285,39 @@ namespace AI_TD1
             }
         }
 
+        /// <summary>
+        /// Determines whether the potential is out of bounds.
+        /// </summary>
+        /// <param name="potentialAction">The potential action.</param>
+        /// <returns>
+        ///   <c>true</c> if the potential is out of bounds; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsPotentialMoveOutOfBounds(Actions potentialAction)
         {
             cEnvironment potentialEnv = CopyEnvironment();
-            potentialEnv.MoveAgent(potentialAction);
+            potentialEnv.DoAgentAction(potentialAction);
 
             return !((potentialEnv.AgentPosX >= 0) && (potentialEnv.AgentPosX < _boardSize)
                 && (potentialEnv.AgentPosY >= 0) && (potentialEnv.AgentPosY < _boardSize));
         }
 
+        /// <summary>
+        /// Determines whether this environment is clean.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this environment is clean; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsClean()
         {
             return !(HasDust() || HasJewels());
         }
 
+        /// <summary>
+        /// Determines whether this environment has dust.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this environment has dust; otherwise, <c>false</c>.
+        /// </returns>
         public bool HasDust()
         {
             for (int X = 0; X < _boardSize; X++)
@@ -214,6 +333,12 @@ namespace AI_TD1
             return false;
         }
 
+        /// <summary>
+        /// Determines whether this environment has jewels.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this environment has jewels; otherwise, <c>false</c>.
+        /// </returns>
         public bool HasJewels()
         {
             for (int X = 0; X < _boardSize; X++)
@@ -229,11 +354,18 @@ namespace AI_TD1
             return false;
         }
 
+        /// <summary>
+        /// Gets the agent's location status.
+        /// </summary>
+        /// <returns>The agent's location status.</returns>
         public char GetAgentLocationStatus()
         {
             return environment[AgentPosX, AgentPosY];
         }
 
+        /// <summary>
+        /// Draws the environment.
+        /// </summary>
         public void DrawEnvironment()
         {
             Console.Clear();
@@ -261,7 +393,34 @@ namespace AI_TD1
             }
 
         }
+        /// <summary>
+        /// Compares this instance to the other instance.
+        /// </summary>
+        /// <param name="other">The other instance.</param>
+        /// <returns>
+        ///   <c>true</c> if both instances are the same; otherwise, <c>false</c>.
 
+        /// </returns>
+        public bool Equals(cEnvironment other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.AgentPosX.Equals(other.AgentPosX)
+                   && this.AgentPosY.Equals(other.AgentPosY)
+                   && this.Environment.Cast<char>().SequenceEqual(other.Environment.Cast<char>());
+        }
+
+        /// <summary>
+        /// Calculate the Manhattan distance
+        /// </summary>
+        /// <returns>The calculated distance</returns>
         public int ManhattanDistance()
         {
             int distanceSum = 0;
@@ -271,12 +430,7 @@ namespace AI_TD1
                 {
                     if (environment[j, i] != '*')
                     {
-                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i) + 1;
-                    }
-                    // If there are two things on the room, add twice the distance
-                    if (environment[j, i] == 'B')
-                    {
-                        distanceSum += 1;
+                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
                     }
                 }
             }
@@ -284,7 +438,15 @@ namespace AI_TD1
         }
         #endregion
 
-        #region Operators
+        #region Operators        
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="env1">The env1.</param>
+        /// <param name="env2">The env2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator ==(cEnvironment env1, cEnvironment env2)
         {
             if (ReferenceEquals(env1, env2))
@@ -303,32 +465,38 @@ namespace AI_TD1
             return env1.Equals(env2);
         }
 
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="env1">The env1.</param>
+        /// <param name="env2">The env2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator !=(cEnvironment env1, cEnvironment env2)
         {
             return !(env1 == env2);
         }
 
-        public bool Equals(cEnvironment other)
-        {
-            if (ReferenceEquals(other, null))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
 
-            return this.AgentPosX.Equals(other.AgentPosX)
-                   && this.AgentPosY.Equals(other.AgentPosY)
-                   && this.Environment.Cast<char>().SequenceEqual(other.Environment.Cast<char>());
-        }
-
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             return Equals(obj as cEnvironment);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             unchecked

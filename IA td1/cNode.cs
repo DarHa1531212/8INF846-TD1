@@ -8,21 +8,87 @@ namespace AI_TD1
 {
     public class cNode
     {
+
+        #region Attributs        
+        /// <summary>
+        /// The environment
+        /// </summary>
         cEnvironment environment;
+        /// <summary>
+        /// Gets or sets the environment.
+        /// </summary>
+        /// <value>
+        /// The environment.
+        /// </value>
         public cEnvironment Environment { get => environment; set => environment = value.CopyEnvironment(); }
 
+        /// <summary>
+        /// The parent
+        /// </summary>
         cNode parent;
+        /// <summary>
+        /// Gets or sets the parent.
+        /// </summary>
+        /// <value>
+        /// The parent.
+        /// </value>
         public cNode Parent { get => parent; set => parent = value; }
 
+        /// <summary>
+        /// The real cost
+        /// </summary>
         int realCost;
+        /// <summary>
+        /// Gets or sets the real cost.
+        /// </summary>
+        /// <value>
+        /// The real cost.
+        /// </value>
         public int RealCost { get => realCost; set => realCost = value; }
+
+        /// <summary>
+        /// The action cost
+        /// </summary>
         int actionCost;
+        /// <summary>
+        /// Gets or sets the action cost.
+        /// </summary>
+        /// <value>
+        /// The action cost.
+        /// </value>
         public int ActionCost { get => actionCost; set => actionCost = value; }
+
+        /// <summary>
+        /// The action
+        /// </summary>
         Actions action;
+        /// <summary>
+        /// Gets or sets the action.
+        /// </summary>
+        /// <value>
+        /// The action.
+        /// </value>
         public Actions Action { get => action; set => action = value; }
+
+        /// <summary>
+        /// The estimated cost
+        /// </summary>
         int estimatedCost;
+        /// <summary>
+        /// Gets or sets the estimated cost.
+        /// </summary>
+        /// <value>
+        /// The estimated cost.
+        /// </value>
         public int EstimatedCost { get => estimatedCost; set => estimatedCost = value; }
 
+        /// <summary>
+        /// Determines whether the specified instance is equal to this instance.        
+        /// /// </summary>
+        /// <param name="other">The other instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified instance is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         protected bool Equals(cNode other)
         {
             bool areAttributesEqual = true;
@@ -32,15 +98,15 @@ namespace AI_TD1
                 other.Action == this.Action &&
                 other.EstimatedCost == this.EstimatedCost;
 
-            if(areAttributesEqual && this.Parent == null && other.Parent == null)
+            if (areAttributesEqual && this.Parent == null && other.Parent == null)
             {
                 return true;
             }
-            if(!areAttributesEqual)
+            if (!areAttributesEqual)
             {
                 return false;
             }
-            if(areAttributesEqual && this.Parent == null)
+            if (areAttributesEqual && this.Parent == null)
             {
                 return false;
             }
@@ -49,7 +115,44 @@ namespace AI_TD1
                 return this.Parent.Equals(other.Parent);
             }
         }
+        #endregion
 
+        #region Ctor        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="cNode"/> class.
+        /// </summary>
+        /// <param name="environment">The environment.</param>
+        public cNode(cEnvironment environment)
+        {
+            this.Environment = environment.CopyEnvironment();
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="cNode"/> class.
+        /// </summary>
+        /// <param name="environment">The environment.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="actionCost">The action cost.</param>
+        public cNode(cEnvironment environment, Actions action, int actionCost)
+        {
+            this.Environment = environment.CopyEnvironment();
+            this.Action = action;
+            this.ActionCost = actionCost;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="cNode"/> class.
+        /// </summary>
+        public cNode() { }
+        #endregion
+
+        #region Operators        
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -58,6 +161,12 @@ namespace AI_TD1
             return Equals((cNode)obj);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             unchecked
@@ -68,29 +177,18 @@ namespace AI_TD1
                 hashCode = (hashCode * 5) + Action.GetHashCode();
                 hashCode = (hashCode * 5) + Environment.GetHashCode();
 
-                if(Parent == null)
+                if (Parent == null)
                 {
                     return hashCode;
-                } else
+                }
+                else
                 {
                     return hashCode + Parent.GetHashCode();
                 }
             }
         }
 
-        #region Ctor
-        public cNode(cEnvironment environment)
-        {
-            this.Environment = environment.CopyEnvironment();
-        }
-        public cNode(cEnvironment environment, Actions action, int actionCost)
-        {
-            this.Environment = environment.CopyEnvironment();
-            this.Action = action;
-            this.ActionCost = actionCost;
-        }
-
-        public cNode() { }
         #endregion
+
     }
 }

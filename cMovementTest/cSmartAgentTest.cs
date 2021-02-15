@@ -51,7 +51,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(2, 2, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
@@ -79,7 +79,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(0, 3, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
@@ -106,7 +106,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(4, 1, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
@@ -133,7 +133,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(2, 0, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 2 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 2 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 2));
             expectedValidActions.Add(new cAction(Actions.Right, 2));
             expectedValidActions.Add(new cAction(Actions.Left, 2));
@@ -160,7 +160,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(0, 0, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
@@ -186,7 +186,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(4, 0, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
@@ -212,7 +212,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(0, 4, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Up, 1));
@@ -238,7 +238,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(4, 4, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
             expectedValidActions.Add(new cAction(Actions.Up, 1));
@@ -264,7 +264,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(3, 4, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 5 - 9 + 12));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 5 - 1 + 12));
             expectedValidActions.Add(new cAction(Actions.PickUp, 5));
             expectedValidActions.Add(new cAction(Actions.Right, 5));
             expectedValidActions.Add(new cAction(Actions.Left, 5));
@@ -291,7 +291,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(2, 1, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 4 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 4 - 1));
             expectedValidActions.Add(new cAction(Actions.Right, 4));
             expectedValidActions.Add(new cAction(Actions.Left, 4));
             expectedValidActions.Add(new cAction(Actions.Down, 4));
@@ -318,7 +318,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(0, 3, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
             expectedValidActions.Add(new cAction(Actions.Up, 1));
@@ -344,7 +344,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(4, 1, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
             expectedValidActions.Add(new cAction(Actions.Up, 1));
@@ -370,7 +370,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(2, 0, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 2 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 2 - 1));
             expectedValidActions.Add(new cAction(Actions.Right, 2));
             expectedValidActions.Add(new cAction(Actions.Left, 2));
             expectedValidActions.Add(new cAction(Actions.Down, 2));
@@ -396,7 +396,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(0, 0, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
 
@@ -421,7 +421,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(4, 0, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
             expectedValidActions.Add(new cAction(Actions.Down, 1));
 
@@ -446,7 +446,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(0, 4, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1));
             expectedValidActions.Add(new cAction(Actions.Right, 1));
             expectedValidActions.Add(new cAction(Actions.Up, 1));
 
@@ -471,7 +471,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(4, 4, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 1 - 1));
             expectedValidActions.Add(new cAction(Actions.Left, 1));
             expectedValidActions.Add(new cAction(Actions.Up, 1));
 
@@ -496,7 +496,7 @@ namespace cTests
             cEnvironment environment = new cEnvironment(3, 4, env);
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedValidActions = new List<cAction>();
-            expectedValidActions.Add(new cAction(Actions.Vacuum, 5 - 9));
+            expectedValidActions.Add(new cAction(Actions.Vacuum, 5 - 1));
             expectedValidActions.Add(new cAction(Actions.Right, 5));
             expectedValidActions.Add(new cAction(Actions.Left, 5));
             expectedValidActions.Add(new cAction(Actions.Up, 5));
@@ -976,8 +976,8 @@ namespace cTests
             cSmartAgent agent = new cSmartAgent();
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
-            expectedActions.Add(new cAction(Actions.Vacuum, (1 - 9 - 25)));
-            expectedActions.Add(new cAction(Actions.None, 1 - 9 - 25));
+            expectedActions.Add(new cAction(Actions.Vacuum, (1 - 1 - 0)));
+            expectedActions.Add(new cAction(Actions.None, 1 - 1 - 0));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1006,14 +1006,14 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Right, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -7));
-            expectedActions.Add(new cAction(Actions.Right, -6));
-            expectedActions.Add(new cAction(Actions.Vacuum, -14));
-            expectedActions.Add(new cAction(Actions.Right, -13));
-            expectedActions.Add(new cAction(Actions.Vacuum, -21));
-            expectedActions.Add(new cAction(Actions.Right, -20));
-            expectedActions.Add(new cAction(Actions.Vacuum, -19 - 9 - 25));
-            expectedActions.Add(new cAction(Actions.None, -19 - 9 - 25));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.Right, 2));
+            expectedActions.Add(new cAction(Actions.Vacuum, 2));
+            expectedActions.Add(new cAction(Actions.Right, 3));
+            expectedActions.Add(new cAction(Actions.Vacuum, 3));
+            expectedActions.Add(new cAction(Actions.Right, 4));
+            expectedActions.Add(new cAction(Actions.Vacuum, 5 - 1 - 0));
+            expectedActions.Add(new cAction(Actions.None, 5 - 1 - 0));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1022,7 +1022,7 @@ namespace cTests
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
@@ -1049,27 +1049,27 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Right, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -7));
-            expectedActions.Add(new cAction(Actions.Down, -6));
-            expectedActions.Add(new cAction(Actions.Down, -5));
-            expectedActions.Add(new cAction(Actions.Vacuum, -13));
-            expectedActions.Add(new cAction(Actions.Right, -12));
-            expectedActions.Add(new cAction(Actions.Right, -11));
-            expectedActions.Add(new cAction(Actions.Down, -10));
-            expectedActions.Add(new cAction(Actions.Vacuum, -18));
-            expectedActions.Add(new cAction(Actions.Right, -17));
-            expectedActions.Add(new cAction(Actions.Down, -16));
-            expectedActions.Add(new cAction(Actions.Vacuum, -15 - 9 - 25));
-            expectedActions.Add(new cAction(Actions.None, -15 - 9 - 25));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.Down, 2));
+            expectedActions.Add(new cAction(Actions.Down, 3));
+            expectedActions.Add(new cAction(Actions.Vacuum, 3));
+            expectedActions.Add(new cAction(Actions.Right, 4));
+            expectedActions.Add(new cAction(Actions.Right, 5));
+            expectedActions.Add(new cAction(Actions.Down, 6));
+            expectedActions.Add(new cAction(Actions.Vacuum, 6));
+            expectedActions.Add(new cAction(Actions.Right, 7));
+            expectedActions.Add(new cAction(Actions.Down, 8));
+            expectedActions.Add(new cAction(Actions.Vacuum, 8));
+            expectedActions.Add(new cAction(Actions.None, 8));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
             actionsList.Add(new cAction(Actions.None, 0));
-            List<cAction> bestActions = agent.RecursiveDS(actionsList, environment, 0, new List<cEnvironment>());
+            List<cAction> bestActions = agent.RecursiveDS(actionsList, environment, 0, new List<cEnvironment>(), 12);
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
@@ -1094,15 +1094,15 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Up, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -7));
-            expectedActions.Add(new cAction(Actions.Down, -6));
-            expectedActions.Add(new cAction(Actions.Down, -5));
-            expectedActions.Add(new cAction(Actions.Vacuum, -13));
-            expectedActions.Add(new cAction(Actions.Down, -12));
-            expectedActions.Add(new cAction(Actions.Vacuum, -20));
-            expectedActions.Add(new cAction(Actions.Down, -19));
-            expectedActions.Add(new cAction(Actions.Vacuum, -18 - 9 - 25));
-            expectedActions.Add(new cAction(Actions.None, -18 - 9 - 25));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.Down, 2));
+            expectedActions.Add(new cAction(Actions.Down, 3));
+            expectedActions.Add(new cAction(Actions.Vacuum, 3));
+            expectedActions.Add(new cAction(Actions.Down, 4));
+            expectedActions.Add(new cAction(Actions.Vacuum, 4));
+            expectedActions.Add(new cAction(Actions.Down, 5));
+            expectedActions.Add(new cAction(Actions.Vacuum, 5));
+            expectedActions.Add(new cAction(Actions.None, 5));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1111,7 +1111,7 @@ namespace cTests
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
@@ -1136,8 +1136,8 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Left, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -32));
-            expectedActions.Add(new cAction(Actions.None, -32));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.None, 1));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1146,7 +1146,7 @@ namespace cTests
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
@@ -1171,8 +1171,8 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Right, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -32));
-            expectedActions.Add(new cAction(Actions.None, -32));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.None, 1));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1181,7 +1181,7 @@ namespace cTests
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
@@ -1207,8 +1207,8 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Up, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -32));
-            expectedActions.Add(new cAction(Actions.None, -32));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.None, 1));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1217,7 +1217,7 @@ namespace cTests
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
@@ -1241,8 +1241,8 @@ namespace cTests
             List<cAction> expectedActions = new List<cAction>();
             expectedActions.Add(new cAction(Actions.None, 0));
             expectedActions.Add(new cAction(Actions.Down, 1));
-            expectedActions.Add(new cAction(Actions.Vacuum, -32));
-            expectedActions.Add(new cAction(Actions.None, -32));
+            expectedActions.Add(new cAction(Actions.Vacuum, 1));
+            expectedActions.Add(new cAction(Actions.None, 1));
 
             //Act
             List<cAction> actionsList = new List<cAction>();
@@ -1251,7 +1251,7 @@ namespace cTests
 
             foreach (var a in bestActions)
             {
-                environment.MoveAgent(a.LatestAction);
+                environment.DoAgentAction(a.LatestAction);
                 Console.WriteLine($"ACTION : {a.LatestAction.ToString()} {a.Cost.ToString()}");
                 Console.WriteLine($"AGENT : ({environment.AgentPosX}, {environment.AgentPosY})");
             }
