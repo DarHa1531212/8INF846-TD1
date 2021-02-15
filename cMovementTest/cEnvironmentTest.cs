@@ -1246,5 +1246,138 @@ namespace cTests
             //Assert
             Assert.IsFalse(areEquals);
         }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Clean()
+        {
+            //Arrange
+            char[,] cleanEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment environment = new cEnvironment(0, 0, cleanEnvironment);
+            int expectedDistance = 0;
+
+            // Act
+            int resultDistance = environment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_OnStuff()
+        {
+            //Arrange
+            char[,] cleanEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'D', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment environment = new cEnvironment(2, 3, cleanEnvironment);
+            int expectedDistance = 0;
+
+            // Act
+            int resultDistance = environment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Dusts()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', 'D', '*', '*' },
+                {'*', '*', 'D', '*', '*' },
+                {'D', 'D', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(0, 0, environment);
+            int expectedDistance = 10;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Jewels()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', 'J' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'J', '*' },
+                {'J', '*', '*', '*', '*' },
+                {'*', '*', 'J', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(2, 3, environment);
+            int expectedDistance = 10;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Both()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', 'B', '*', 'B', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', 'B', '*', 'B', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(2, 2, environment);
+            int expectedDistance = 16;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+
+        [TestMethod]
+        public void T_ManhattanDistance_Multiple()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', 'D', '*', 'J' },
+                {'*', 'J', '*', '*', '*' },
+                {'*', '*', 'B', '*', '*' },
+                {'B', '*', '*', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(3, 3, environment);
+            int expectedDistance = 19;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
     }
 }
