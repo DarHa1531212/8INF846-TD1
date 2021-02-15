@@ -271,12 +271,12 @@ namespace AI_TD1
                 {
                     if (environment[j, i] != '*')
                     {
-                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
+                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i) + 1;
                     }
                     // If there are two things on the room, add twice the distance
                     if (environment[j, i] == 'B')
                     {
-                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
+                        distanceSum += 1;
                     }
                 }
             }

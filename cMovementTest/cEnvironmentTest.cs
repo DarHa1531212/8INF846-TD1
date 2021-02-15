@@ -1282,7 +1282,7 @@ namespace cTests
             };
 
             cEnvironment environment = new cEnvironment(2, 3, cleanEnvironment);
-            int expectedDistance = 0;
+            int expectedDistance = 1;
 
             // Act
             int resultDistance = environment.ManhattanDistance();
@@ -1304,7 +1304,7 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(0, 0, environment);
-            int expectedDistance = 10;
+            int expectedDistance = 14;
 
             // Act
             int resultDistance = cEnvironment.ManhattanDistance();
@@ -1326,7 +1326,7 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(2, 3, environment);
-            int expectedDistance = 10;
+            int expectedDistance = 14;
 
             // Act
             int resultDistance = cEnvironment.ManhattanDistance();
@@ -1371,7 +1371,7 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(3, 3, environment);
-            int expectedDistance = 19;
+            int expectedDistance = 21;
 
             // Act
             int resultDistance = cEnvironment.ManhattanDistance();
