@@ -79,6 +79,11 @@ namespace AI_TD1
             rootNode.ActionCost = 0;
             rootNode.Action = Actions.None;
 
+            if(rootNode.Environment.IsClean())
+            {
+                return Actions.None;
+            }
+
             openNodesList.Add(rootNode);
 
             //3.  while the open list is not empty
