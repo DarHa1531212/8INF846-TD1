@@ -1482,6 +1482,60 @@ namespace cTests
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
         }
 
+        [TestMethod]
+        public void T_retrieveFirstAction_TwoNodes()
+        {
+            // Arrange
+            cNode rootNode = new cNode(new cEnvironment(1, 3));
+            rootNode.EstimatedCost = 40;
+
+            cNode node1 = new cNode(new cEnvironment(1, 2), Actions.Up, 1);
+            node1.EstimatedCost = 37;
+            node1.Parent = rootNode;
+
+            Actions expectedAction = Actions.Up;
+
+            cSmartAgent agent = new cSmartAgent();
+            // Act
+            Actions resultAction = agent.retrieveFirstAction(rootNode, node1);
+
+            // Assert
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_retrieveFirstAction_SeveralNodes()
+        {
+            // Arrange
+            cNode rootNode = new cNode(new cEnvironment(1, 3));
+            rootNode.EstimatedCost = 40;
+
+            cNode node1 = new cNode(new cEnvironment(1, 2), Actions.Up, 1);
+            node1.EstimatedCost = 37;
+            node1.Parent = rootNode;
+
+            cNode node2 = new cNode(new cEnvironment(1, 1), Actions.Up, 1);
+            node2.EstimatedCost = 35;
+            node2.Parent = node1;
+
+            cNode node3 = new cNode(new cEnvironment(0, 2), Actions.Left, 1);
+            node3.EstimatedCost = 36;
+            node3.Parent = node1;
+
+            cNode node4 = new cNode(new cEnvironment(2, 1), Actions.Right, 1);
+            node4.EstimatedCost = 33;
+            node4.Parent = node2;
+
+            Actions expectedAction = Actions.Up;
+
+            cSmartAgent agent = new cSmartAgent();
+            // Act
+            Actions resultAction = agent.retrieveFirstAction(rootNode, node4);
+
+            // Assert
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
 
 
     }
