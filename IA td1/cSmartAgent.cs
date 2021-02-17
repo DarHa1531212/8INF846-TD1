@@ -137,16 +137,16 @@ namespace AI_TD1
 
                 openNodesList.Remove(leastCostingNode);
 
+                if (leastCostingNode.Environment.IsClean())
+                {
+                    return retrieveFirstAction(rootNode, leastCostingNode);
+                }
+
                 List<cNode> successors = generateSuccessors(leastCostingNode);
 
                 foreach (var successor in successors)
                 {
                     successor.Parent = leastCostingNode;
-
-                    if (successor.Environment.IsClean())
-                    {
-                        return retrieveFirstAction(rootNode, successor);
-                    }
                     successor.RealCost = leastCostingNode.RealCost + successor.ActionCost;
                     successor.EstimatedCost = successor.RealCost + successor.Environment.ManhattanDistance();
 
@@ -215,6 +215,7 @@ namespace AI_TD1
 
             if (parent.Environment.GetAgentLocationStatus() == 'B')
             {
+                
                 cNode vacuum = new cNode(
                     parent.Environment,
                     Actions.Vacuum,
@@ -222,6 +223,7 @@ namespace AI_TD1
                 );
                 vacuum.Environment.DoAgentAction(vacuum.Action);
                 successors.Add(vacuum);
+                
                 //TODO : ajouter récompense
                 cNode pickup = new cNode(
                     parent.Environment,
@@ -230,6 +232,7 @@ namespace AI_TD1
                 );
                 pickup.Environment.DoAgentAction(pickup.Action);
                 successors.Add(pickup);
+                //return successors;
             }
 
             if (parent.Environment.GetAgentLocationStatus() == 'D')
@@ -241,6 +244,7 @@ namespace AI_TD1
                 );
                 vacuum.Environment.DoAgentAction(vacuum.Action);
                 successors.Add(vacuum);
+                //return successors;
             }
 
             if (parent.Environment.GetAgentLocationStatus() == 'J')
@@ -252,6 +256,7 @@ namespace AI_TD1
                 );
                 pickup.Environment.DoAgentAction(pickup.Action);
                 successors.Add(pickup);
+                //return successors;
             }
 
 
@@ -366,22 +371,25 @@ namespace AI_TD1
             if (inEnvironment.GetAgentLocationStatus() == 'B')
             {
                 //a given action has a cost of 1, if the agent vacuums on Both, cost points are added as a penalty for vacuuming a jewel
-                cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1 + bonusVacuumDust + penaltyVacuumJewel);
+                //cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1 + bonusVacuumDust + penaltyVacuumJewel);
                 cAction pickupAction = new cAction(Actions.PickUp, currentCost + 1);
-                potentialMoves.Add(vacuumAction);
+                //potentialMoves.Add(vacuumAction);
                 potentialMoves.Add(pickupAction);
+                return potentialMoves;
             }
 
             if (inEnvironment.GetAgentLocationStatus() == 'D')
             {
                 cAction vacuumAction = new cAction(Actions.Vacuum, currentCost + 1 + bonusVacuumDust);
                 potentialMoves.Add(vacuumAction);
+                return potentialMoves;
             }
 
             if (inEnvironment.GetAgentLocationStatus() == 'J')
             {
                 cAction pickupAction = new cAction(Actions.PickUp, currentCost + 1);
                 potentialMoves.Add(pickupAction);
+                return potentialMoves;
             }
 
             cAction movementRight = new cAction(Actions.Right, currentCost + 1);

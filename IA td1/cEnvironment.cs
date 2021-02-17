@@ -430,7 +430,7 @@ namespace AI_TD1
                 {
                     if (environment[j, i] != '*')
                     {
-                        distanceSum += Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
+                        distanceSum += 1/*Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i)*/;
                     }
                 }
             }

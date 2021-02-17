@@ -1723,7 +1723,27 @@ namespace cTests
             };
             cEnvironment environment = new cEnvironment(2, 1, env);
             cSmartAgent agent = new cSmartAgent();
-            Actions expectedAction = Actions.Left;
+            Actions expectedAction = Actions.Up;
+
+            Actions resultAction = agent.AStar(environment);
+
+            Assert.AreEqual(expectedAction, resultAction);
+        }
+
+        [TestMethod]
+        public void T_AStar_Mansion()
+        {
+            //Arrange
+            char[,] env = {
+                {'J', '*', '*', '*', 'J' },
+                {'*', '*', '*', '*', 'D' },
+                {'*', 'D', '*', '*', '*' },
+                {'*', '*', 'J', '*', '*' },
+                {'*', 'D', '*', 'B', '*' }
+            };
+            cEnvironment environment = new cEnvironment(2, 2, env);
+            cSmartAgent agent = new cSmartAgent();
+            Actions expectedAction = Actions.Right;
 
             Actions resultAction = agent.AStar(environment);
 
