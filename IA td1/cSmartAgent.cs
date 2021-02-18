@@ -32,7 +32,6 @@ namespace AI_TD1
             cAction initialSetup = new cAction(Actions.None, 0);
             actionsList.Add(initialSetup);
 
-
             while (true)
             {
                 if (agentCanMove)
@@ -239,11 +238,27 @@ namespace AI_TD1
         public Actions retrieveFirstAction (cNode rootNode, cNode goalNode)
         {
             cNode currentNode = goalNode;
+            Console.WriteLine("Action : " + currentNode.Action);
             while (!currentNode.Parent.Environment.Equals(rootNode.Environment))
             {
                 currentNode = currentNode.Parent;
+                Console.WriteLine("Action : " + currentNode.Action);
             }
             return currentNode.Action;
+        }
+
+        public List<Actions> retrieveActionList(cNode rootNode, cNode goalNode)
+        {
+            List<Actions> actionList = new List<Actions>();
+            cNode currentNode = goalNode;
+            while (currentNode.Parent != null && !currentNode.Parent.Environment.Equals(rootNode.Environment))
+            {
+                actionList.Add(currentNode.Action);
+                currentNode = currentNode.Parent;
+            }
+            actionList.Add(currentNode.Action);
+            actionList.Reverse();
+            return actionList;
         }
 
         public List<cAction> RecursiveDS(
@@ -306,7 +321,7 @@ namespace AI_TD1
 
             return bestActionList;
         }
-        
+
         public List<cAction> FindValidActions(int currentCost, cEnvironment inEnvironment)
         {
             List<cAction> potentialMoves = new List<cAction>();
@@ -359,5 +374,346 @@ namespace AI_TD1
             return potentialMoves;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //public Actions findBestAction(cEnvironment initialState)
+        //{
+        //    cNode rootNode = new cNode(initialState);
+        //    rootNode.Action = Actions.None;
+        //    rootNode.ActionCost = 0;
+        //    rootNode.RealCost = int.MaxValue;
+        //    rootNode.Parent = null;
+        //    rootNode.Depth = 0;
+
+        //    Queue<cNode> outsideBorder = new Queue<cNode>();
+
+        //    return retrieveFirstAction(rootNode, TreeSearch(rootNode, outsideBorder));
+        //}
+
+        ///* 
+        // * Pseudocode from
+        // * 8INF846 - Semaine #3 Exploration non informée - Diapo 22
+        //*/
+        //public cNode TreeSearch(cNode rootNode, Queue<cNode> outsideBorder)
+        //{
+        //    outsideBorder.Enqueue(rootNode);
+        //    cNode bestGoalNode = rootNode;
+
+        //    List<cNode> alreadyVisitedNodes = new List<cNode>();
+
+        //    int cpt = 0;
+
+        //    while (true)
+        //    {
+        //        if (outsideBorder.Count == 0)
+        //        {
+        //            return bestGoalNode;
+        //        }
+
+        //        cNode node = outsideBorder.Dequeue();
+        //        if (node.Environment.IsClean())
+        //        {
+        //            if (node.RealCost < bestGoalNode.RealCost)
+        //            {
+        //                bestGoalNode = node;
+        //            }
+        //        }
+
+        //        /* Reaching depth 13, we return the best path yet even if it's not optimal
+        //         * To avoid taking too much time
+        //        */
+        //        if (node.Depth > 6 && bestGoalNode != rootNode)
+        //        {
+        //            return bestGoalNode;
+        //        }
+
+        //        alreadyVisitedNodes.Add(node);
+        //        Console.WriteLine($"{node.Depth} ({cpt++})");
+        //        Queue<cNode> successors = Expand(node, alreadyVisitedNodes);
+        //        while (successors.Count != 0)
+        //        {
+        //            outsideBorder.Enqueue(successors.Dequeue());
+        //        }
+        //        //EnqueueAll(outsideBorder, Expand(node));
+        //    }
+        //}
+
+        //public void EnqueueAll(Queue<cNode> queue, Queue<cNode> toEnqueue)
+        //{
+        //    while (toEnqueue.Count != 0)
+        //    {
+        //        queue.Enqueue(toEnqueue.Dequeue());
+        //    }
+        //}
+
+        ///* 
+        // * Code inspired by
+        // * 8INF846 - Semaine #3 Exploration non informée - Diapo 22
+        //*/
+        //public Queue<cNode> Expand(cNode parent, List<cNode> alreadyVisitedNodes)
+        //{
+        //    Queue<cNode> successors = new Queue<cNode>();
+        //    List<Actions> actions = SuccessorFn(parent.Environment);
+        //    foreach (var action in actions)
+        //    {
+        //        cEnvironment sEnvironment = parent.Environment.CopyEnvironment();
+        //        int actionCost = sEnvironment.MoveAgent(action);
+        //        cNode s = new cNode(sEnvironment);
+        //        s.Parent = parent;
+        //        s.Action = action;
+        //        s.RealCost = parent.RealCost + actionCost;
+        //        s.Depth = parent.Depth + 1;
+
+        //        if (alreadyVisitedNodes.Contains(s))
+        //        {
+        //            /* If it has been visited sooner, then the subtree having 
+        //             * s as it's root isn't the best solution and can be skipped 
+        //             */
+        //            continue;
+        //        }
+
+        //        successors.Enqueue(s);
+        //    }
+        //    return successors;
+        //}
+
+        //public List<Actions> SuccessorFn(cEnvironment environment)
+        //{
+        //    List<Actions> potentialActions = new List<Actions>();
+
+        //    if (environment.GetAgentLocationStatus() == 'B')
+        //    {
+        //        potentialActions.Add(Actions.PickUp);
+        //    }
+
+        //    if (environment.GetAgentLocationStatus() == 'D')
+        //    {
+        //        potentialActions.Add(Actions.Vacuum);
+        //    }
+
+        //    if (environment.GetAgentLocationStatus() == 'J')
+        //    {
+        //        potentialActions.Add(Actions.PickUp);
+        //    }
+
+        //    List<Actions> movementActions = new List<Actions> { Actions.Right, Actions.Left, Actions.Up, Actions.Down };
+        //    foreach (var action in movementActions)
+        //    {
+        //        if (!environment.IsPotentialMoveOutOfBounds(action))
+        //        {
+        //            potentialActions.Add(action);
+        //        }
+        //    }
+
+        //    return potentialActions;
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+        public Actions FindBestAction(cEnvironment initialState)
+        {
+            cNode rootNode = new cNode(initialState);
+            rootNode.Action = Actions.None;
+            rootNode.ActionCost = 0;
+            rootNode.RealCost = int.MaxValue;
+            rootNode.Parent = null;
+            rootNode.Depth = 0;
+
+            return retrieveFirstAction(rootNode, IterativeDeepening(rootNode));
+        }
+
+        public cNode IterativeDeepening(cNode rootNode)
+        {
+            Tuple<cNode, RecursiveDLStatus> result =
+                new Tuple<cNode, RecursiveDLStatus>(null, RecursiveDLStatus.FAILURE);
+            int maxDepth = 0;
+            while (result.Item2 != RecursiveDLStatus.SUCCESS)
+            {
+                List<cNode> alreadyVisitedNodes = new List<cNode>();
+                result = RecursiveDLS(rootNode, maxDepth, alreadyVisitedNodes);
+                maxDepth++;
+            }
+            return result.Item1;
+        }
+
+        /*public Tuple<cNode, RecursiveDLStatus> DepthLimitedSearch(cEnvironment initialState, int maxDepth)
+        {
+            cNode rootNode = new cNode(initialState);
+            rootNode.Action = Actions.None;
+            rootNode.ActionCost = 0;
+            rootNode.RealCost = int.MaxValue;
+            rootNode.Parent = null;
+            rootNode.Depth = 0;
+
+            return RecursiveDLS(rootNode, maxDepth);
+        }*/
+
+        public enum RecursiveDLStatus { SUCCESS, FAILURE, CUTOFF };
+
+        /*
+         * Inspired by pseudocode from
+         * 8INF846 - Semaine #3 Exploration non informée - Diapo 33
+        */
+        public Tuple<cNode, RecursiveDLStatus> RecursiveDLS(cNode currentNode, int maxDepth, List<cNode> alreadyVisitedNodes)
+        {
+            bool cutoffOccured = false;
+
+            if (currentNode.Environment.IsClean())
+            {
+                return new Tuple<cNode, RecursiveDLStatus>(
+                    currentNode,
+                    RecursiveDLStatus.SUCCESS
+                );
+            }
+
+            if (currentNode.Depth > maxDepth || alreadyVisitedNodes.Contains(currentNode))
+            {
+                return new Tuple<cNode, RecursiveDLStatus>(
+                    null,
+                    RecursiveDLStatus.CUTOFF
+                );
+            }
+
+            List<cNode> alreadyVisitedNodesExtended = new List<cNode>(alreadyVisitedNodes);
+            alreadyVisitedNodesExtended.Add(currentNode);
+
+            List<cNode> successors = Expand(currentNode);
+
+            foreach (var successor in successors)
+            {
+                try
+                {
+                    Tuple<cNode, RecursiveDLStatus> result = RecursiveDLS(successor, maxDepth, alreadyVisitedNodesExtended);
+                    
+                    if (result.Item2 == RecursiveDLStatus.CUTOFF)
+                    {
+                        cutoffOccured = true;
+                    }
+
+                    if (result.Item2 == RecursiveDLStatus.SUCCESS)
+                    {
+                        return result;
+                    }
+
+                    if (result.Item2 == RecursiveDLStatus.FAILURE)
+                    {
+                        return new Tuple<cNode, RecursiveDLStatus>(
+                            null,
+                            RecursiveDLStatus.FAILURE
+                        );
+                    }
+                }
+                catch (OutOfMemoryException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return new Tuple<cNode, RecursiveDLStatus>(
+                        null,
+                        RecursiveDLStatus.FAILURE
+                    );
+                }
+            }
+
+            if (cutoffOccured)
+            {
+                return new Tuple<cNode, RecursiveDLStatus>(
+                    null,
+                    RecursiveDLStatus.CUTOFF
+                );
+            }
+
+            return new Tuple<cNode, RecursiveDLStatus>(
+                null,
+                RecursiveDLStatus.FAILURE
+            );
+        }
+
+        /*
+         * Inspired by pseudocode from
+         * 8INF846 - Semaine #3 Exploration non informée - Diapo 22
+        */
+        public List<cNode> Expand(cNode parent)
+        {
+            List<cNode> successors = new List<cNode>();
+            List<Actions> actions = SuccessorFn(parent.Environment);
+
+            foreach (var action in actions)
+            {
+                cEnvironment sEnvironment = parent.Environment.CopyEnvironment();
+                int actionCost = sEnvironment.MoveAgent(action);
+                cNode s = new cNode(sEnvironment);
+                s.Parent = parent;
+                s.Action = action;
+                s.ActionCost = actionCost;
+                s.RealCost = parent.RealCost + actionCost;
+                s.Depth = parent.Depth + 1;
+                successors.Add(s);
+            }
+            return successors;
+        }
+
+        /* TODO : Se mettre d'accord sur la génération des enfants */
+        public List<Actions> SuccessorFn(cEnvironment environment)
+        {
+            List<Actions> potentialActions = new List<Actions>();
+
+            if (environment.GetAgentLocationStatus() == 'B')
+            {
+                potentialActions.Add(Actions.PickUp);
+                return potentialActions;
+            }
+
+            if (environment.GetAgentLocationStatus() == 'D')
+            {
+                potentialActions.Add(Actions.Vacuum);
+                return potentialActions;
+            }
+
+            if (environment.GetAgentLocationStatus() == 'J')
+            {
+                potentialActions.Add(Actions.PickUp);
+                return potentialActions;
+            }
+
+            List<Actions> movementActions = new List<Actions> { Actions.Right, Actions.Left, Actions.Up, Actions.Down };
+            foreach (var action in movementActions)
+            {
+                if (!environment.IsPotentialMoveOutOfBounds(action))
+                {
+                    potentialActions.Add(action);
+                }
+            }
+
+            return potentialActions;
+        }
     }
 }

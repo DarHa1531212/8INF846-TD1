@@ -20,6 +20,9 @@ namespace AI_TD1
         private const double _dustRate = 100000 / 25 / 1;
         private const double _jewelRate = 100000 / 25 / 4;
 
+        private int _penaltyVacuumJewel = 12;
+        private int _bonusVacuumDust = -9;
+
         #endregion
 
         #region Attributes
@@ -103,22 +106,23 @@ namespace AI_TD1
                 return true;
             return false;
         }
-
-
+        
         private bool IsDustOnAgentPosition()
         {
             if (Environment[AgentPosX, AgentPosY] == 'D' || Environment[AgentPosX, AgentPosY] == 'B')
                 return true;
             return false;
         }
+
         private int CountVacuumActionCost()
         {
             int cost = 1;
             if (IsJewelOnAgentPosition())
                 cost += penaltyVacuumJewel;
             if (IsDustOnAgentPosition())
-                cost -= bonusVacuumDust;
+                cost += bonusVacuumDust;
 
+            Console.WriteLine("cost : " + cost);
             return cost;
         }
 
@@ -136,15 +140,19 @@ namespace AI_TD1
             return tempEnv;
         }
 
-        private char PickUp()
+        private Tuple<char, int> PickUp()
         {
             switch (Environment[AgentPosX, AgentPosY])
             {
 
-                case 'B': return 'D';
-                case 'J': return '*';
-                case 'D': return 'D';
-                default: return '*';
+                case 'B':
+                    return new Tuple<char, int>('D', 0);
+                case 'J':
+                    return new Tuple<char, int>('*', 0);
+                case 'D':
+                    return new Tuple<char, int>('D', 0);
+                default:
+                    return new Tuple<char, int>('*', 0);
             }
         }
         #endregion
@@ -175,11 +183,13 @@ namespace AI_TD1
                     AgentPosY++;
                     return 1;
                 case Actions.PickUp:
-                    Environment[AgentPosX, AgentPosY] = PickUp();
-                    return 1;
+                    Tuple<char, int> pickup = PickUp();
+                    Environment[AgentPosX, AgentPosY] = pickup.Item1;
+                    return 1 + pickup.Item2;
                 case Actions.Vacuum:
+                    int vacuumActionCost = CountVacuumActionCost();
                     Environment[AgentPosX, AgentPosY] = '*';
-                    return CountVacuumActionCost();
+                    return vacuumActionCost;
                 default: // default action is None
                     return 0;
             }
