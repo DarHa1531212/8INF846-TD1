@@ -806,7 +806,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
 
             //Act
-            target.UpdateEnvironment(100000, 100000, 0, 1000);
+            target.UpdateEnvironment(100000, 100000, 0, 0);
 
             //Assert
             CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
@@ -860,7 +860,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
 
             //Act
-            target.UpdateEnvironment(100000, 100000, 0, 1000);
+            target.UpdateEnvironment(100000, 100000, 0, 0);
 
             //Assert
             CollectionAssert.AreEqual(target.Environment, expectedEnvironment);
