@@ -23,11 +23,11 @@ namespace AI_TD1
         /// <summary>
         /// The bonus for vacuuming dust
         /// </summary>
-        const int bonusVacuumDust = -1;
+        const int bonusVacuumDust = 0;
         /// <summary>
         /// The bonus for picking up a jewel
         /// </summary>
-        const int bonusPickupJewel = -1;
+        const int bonusPickupJewel = 0;
         #endregion
 
         #region Attributes
@@ -147,7 +147,7 @@ namespace AI_TD1
                 {
                     successor.Parent = leastCostingNode;
                     successor.RealCost = leastCostingNode.RealCost + successor.ActionCost;
-                    successor.EstimatedCost = successor.RealCost + successor.Environment.ManhattanDistance();
+                    successor.EstimatedCost = successor.RealCost + successor.Environment.Heuristic();
 
                     List<cNode> lessCostingInstanceOfEnvironmentInOpen = openNodesList.FindAll(
                         delegate (cNode node)

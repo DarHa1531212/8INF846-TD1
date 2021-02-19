@@ -1272,7 +1272,7 @@ namespace cTests
         }
 
         [TestMethod]
-        public void T_ManhattanDistance_Clean()
+        public void T_Heuristic_Clean()
         {
             //Arrange
             char[,] cleanEnvironment = {
@@ -1287,14 +1287,14 @@ namespace cTests
             int expectedDistance = 0;
 
             // Act
-            int resultDistance = environment.ManhattanDistance();
+            int resultDistance = environment.Heuristic();
 
             // Assert
             Assert.AreEqual(expectedDistance, resultDistance);
         }
 
         [TestMethod]
-        public void T_ManhattanDistance_OnStuff()
+        public void T_Heuristic_OnStuff()
         {
             //Arrange
             char[,] cleanEnvironment = {
@@ -1306,17 +1306,17 @@ namespace cTests
             };
 
             cEnvironment environment = new cEnvironment(2, 3, cleanEnvironment);
-            int expectedDistance = 0;
+            int expectedDistance = 1;
 
             // Act
-            int resultDistance = environment.ManhattanDistance();
+            int resultDistance = environment.Heuristic();
 
             // Assert
             Assert.AreEqual(expectedDistance, resultDistance);
         }
 
         [TestMethod]
-        public void T_ManhattanDistance_Dusts()
+        public void T_Heuristic_Dusts()
         {
             //Arrange
             char[,] environment = {
@@ -1328,17 +1328,17 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(0, 0, environment);
-            int expectedDistance = 10;
+            int expectedDistance = 7;
 
             // Act
-            int resultDistance = cEnvironment.ManhattanDistance();
+            int resultDistance = cEnvironment.Heuristic();
 
             // Assert
             Assert.AreEqual(expectedDistance, resultDistance);
         }
 
         [TestMethod]
-        public void T_ManhattanDistance_Jewels()
+        public void T_Heuristic_Jewels()
         {
             //Arrange
             char[,] environment = {
@@ -1350,17 +1350,17 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(2, 3, environment);
-            int expectedDistance = 10;
+            int expectedDistance = 8;
 
             // Act
-            int resultDistance = cEnvironment.ManhattanDistance();
+            int resultDistance = cEnvironment.Heuristic();
 
             // Assert
             Assert.AreEqual(expectedDistance, resultDistance);
         }
 
         [TestMethod]
-        public void T_ManhattanDistance_Both()
+        public void T_Heuristic_Both()
         {
             //Arrange
             char[,] environment = {
@@ -1372,10 +1372,10 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(2, 2, environment);
-            int expectedDistance = 8;
+            int expectedDistance = 10;
 
             // Act
-            int resultDistance = cEnvironment.ManhattanDistance();
+            int resultDistance = cEnvironment.Heuristic();
 
             // Assert
             Assert.AreEqual(expectedDistance, resultDistance);
@@ -1383,7 +1383,7 @@ namespace cTests
 
 
         [TestMethod]
-        public void T_ManhattanDistance_Multiple()
+        public void T_Heuristic_Multiple()
         {
             //Arrange
             char[,] environment = {
@@ -1395,10 +1395,10 @@ namespace cTests
             };
 
             cEnvironment cEnvironment = new cEnvironment(3, 3, environment);
-            int expectedDistance = 14;
+            int expectedDistance = 11;
 
             // Act
-            int resultDistance = cEnvironment.ManhattanDistance();
+            int resultDistance = cEnvironment.Heuristic();
 
             // Assert
             Assert.AreEqual(expectedDistance, resultDistance);

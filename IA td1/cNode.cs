@@ -84,39 +84,6 @@ namespace AI_TD1
         /// </value>
         public int EstimatedCost { get => estimatedCost; set => estimatedCost = value; }
 
-        /// <summary>
-        /// Determines whether the specified instance is equal to this instance.        
-        /// /// </summary>
-        /// <param name="other">The other instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified instance is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        protected bool Equals(cNode other)
-        {
-            bool areAttributesEqual = true;
-            areAttributesEqual = other.Environment.Equals(this.environment) &&
-                other.RealCost == this.RealCost &&
-                other.ActionCost == this.ActionCost &&
-                other.Action == this.Action &&
-                other.EstimatedCost == this.EstimatedCost;
-
-            if (areAttributesEqual && this.Parent == null && other.Parent == null)
-            {
-                return true;
-            }
-            if (!areAttributesEqual)
-            {
-                return false;
-            }
-            if (areAttributesEqual && this.Parent == null)
-            {
-                return false;
-            }
-            else
-            {
-                return this.Parent.Equals(other.Parent);
-            }
-        }
         #endregion
 
         #region Ctor        
@@ -170,44 +137,42 @@ namespace AI_TD1
         public static bool operator !=(cNode node1, cNode node2)
         {
             return !(node1 == node2);
-        }
+        }    
 
-        public bool Equals(cNode other)
+        /// <summary>
+        /// Determines whether the specified instance is equal to this instance.        
+        /// /// </summary>
+        /// <param name="other">The other instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified instance is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        protected bool Equals(cNode other)
         {
-            if (ReferenceEquals(other, null))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, other))
+            bool areAttributesEqual = true;
+            areAttributesEqual = other.Environment.Equals(this.environment) &&
+                other.RealCost == this.RealCost &&
+                other.ActionCost == this.ActionCost &&
+                other.Action == this.Action &&
+                other.EstimatedCost == this.EstimatedCost;
+
+            if (areAttributesEqual && this.Parent == null && other.Parent == null)
             {
                 return true;
             }
-
-            return this.Environment.Equals(other.Environment);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as cNode);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
+            if (!areAttributesEqual)
             {
-                int hashCode = Action.GetHashCode();
-                hashCode = (hashCode * 397) ^ Environment.GetHashCode();
-                hashCode = (hashCode * 397) ^ Depth.GetHashCode();
-                hashCode = (hashCode * 397) ^ Parent.GetHashCode();
-                hashCode = (hashCode * 397) ^ RealCost.GetHashCode();
-                hashCode = (hashCode * 397) ^ EstimatedCost.GetHashCode();
-                hashCode = (hashCode * 397) ^ ActionCost.GetHashCode();
-                return hashCode;
+                return false;
+            }
+            if (areAttributesEqual && this.Parent == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.Parent.Equals(other.Parent);
             }
         }
-        #endregion
 
-        #region Operators        
         /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// </summary>

@@ -54,7 +54,7 @@ namespace AI_TD1
         /// <summary>
         /// The dust vacuum bonus
         /// </summary>
-        private const int bonusVacuumDust = -1;
+        private const int bonusVacuumDust = 0;
 
         /// <summary>
         /// The environment
@@ -238,13 +238,13 @@ namespace AI_TD1
             {
 
                 case 'B':
-                    return new Tuple<char, int>('D', 0);
+                    return new Tuple<char, int>('D', 1);
                 case 'J':
-                    return new Tuple<char, int>('*', 0);
+                    return new Tuple<char, int>('*', 1);
                 case 'D':
-                    return new Tuple<char, int>('D', 0);
+                    return new Tuple<char, int>('D', 1);
                 default:
-                    return new Tuple<char, int>('*', 0);
+                    return new Tuple<char, int>('*', 1);
             }
         }
         #endregion
@@ -431,20 +431,31 @@ namespace AI_TD1
         /// Calculate the Manhattan distance
         /// </summary>
         /// <returns>The calculated distance</returns>
-        public int ManhattanDistance()
+        public int Heuristic()
         {
-            int distanceSum = 0;
+            int objectCount = 0;
+            int maxDistanceToSomething = 0;
+            int distanceToStuff = 0;
             for (int i = 0; i < _boardSize; ++i)
             {
                 for (int j = 0; j < _boardSize; ++j)
                 {
                     if (environment[j, i] != '*')
                     {
-                        distanceSum += 1/*Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i)*/;
+                        objectCount += 1;
+                        distanceToStuff = Math.Abs(AgentPosX - j) + Math.Abs(AgentPosY - i);
+                        if(distanceToStuff > maxDistanceToSomething)
+                        {
+                            maxDistanceToSomething = distanceToStuff;
+                        }
+                    }
+                    if(environment[i,j] == 'B')
+                    {
+                        objectCount += 1;
                     }
                 }
             }
-            return distanceSum;
+            return objectCount + maxDistanceToSomething;
         }
         #endregion
 
