@@ -56,7 +56,6 @@
     <Compile Include="cEnvironmentTest.cs" />
     <Compile Include="cSmartAgentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="cActionTest.cs" />
     <Compile Include="cAStarTest.cs" />
   </ItemGroup>
   <ItemGroup>

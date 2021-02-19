@@ -31,18 +31,14 @@ namespace AI_TD1
         /// The board size
         /// </summary>
         private const int _boardSize = 5;
-
         /// <summary>
         /// The dust rate
         /// </summary>
-        private const double _dustRate = 100000 / 25 / 1;
+        private const double _dustRate = 100000 / 25 / 2;
         /// <summary>
         /// The jewel rate
         /// </summary>
         private const double _jewelRate = 100000 / 25 / 4;
-
-        private int _penaltyVacuumJewel = 12;
-        private int _bonusVacuumDust = -9;
 
         #endregion
 
@@ -138,7 +134,6 @@ namespace AI_TD1
         )
         {
             char[,] tmpEnvironment = Environment;
-            cSmartAgent tempAgent = new cSmartAgent();
             double rng;
             Random r = new Random();
 
@@ -168,7 +163,6 @@ namespace AI_TD1
                     }
                 }
             }
-            tempAgent.AgentCanMoove = true;
 
             environment = tmpEnvironment;
         }
@@ -210,8 +204,6 @@ namespace AI_TD1
                 return penaltyVacuumJewel;
             if (IsDustOnAgentPosition())
                 return 0 - bonusVacuumDust;
-
-            Console.WriteLine("cost : " + cost);
             return cost;
         }
 
@@ -243,7 +235,7 @@ namespace AI_TD1
             {
 
                 case 'B':
-                    return new Tuple<char, int>('D', 0);
+                    return new Tuple<char, int>('D', 0 - bonusPickUpJewel);
                 case 'J':
                     return new Tuple<char, int>('*', 0 - bonusPickUpJewel);
                 case 'D':

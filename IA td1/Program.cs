@@ -9,15 +9,18 @@ namespace AI_TD1
 {
     class Program
     {
+        private static cEnvironment mansion = new cEnvironment(2, 2);
+        private static bool agentCanMove = false;
+        private static bool environmentCanUpdate = true;
+
         static void Main(string[] args)
         {
-
              bool validresponse = false;
-            bool isInformed = false;
+             bool isInformed = false;
 
              while (!validresponse) { 
-                 Console.WriteLine("1 pour agent non informé");
-                 Console.WriteLine("2 pour un agent informé");
+                 Console.WriteLine("Type 1 to execute an non informed agent");
+                 Console.WriteLine("Type 2 to execute an informed agent");
                  int result = Console.Read();
 
                  if (result == 49)
@@ -35,45 +38,36 @@ namespace AI_TD1
                      Console.WriteLine("Wrong character, try again");
                  }
              }
-
-            //todo remove testing parameters
-
-
-            char[,] env = {
-                {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', 'D', '*' },
-                {'*', '*', '*', '*', '*' },
-                {'*', '*', '*', '*', '*' }
-            };
-            cEnvironment target = new cEnvironment(3, 3, env);
-
-
-
-            cEnvironment mansion = new cEnvironment(0, 0);
-
-            //Testing
-
-            Thread environmentThread = new Thread(() => UpdateEnvironmentLoop(target));
+            
+            Thread environmentThread = new Thread(() => UpdateEnvironmentLoop());
             environmentThread.Start();
 
-            cSmartAgent agent = new cSmartAgent(target, isInformed);
+            cSmartAgent agent = new cSmartAgent(isInformed);
 
-
+            while (true)
+            {
+                if(agentCanMove)
+                {
+                    cEnvironment updatedMansion = agent.lifeCycle(mansion);
+                    mansion = updatedMansion.CopyEnvironment();
+                    agentCanMove = false;
+                    environmentCanUpdate = true;
+                }
+            }
         }
 
-        public static void UpdateEnvironmentLoop(cEnvironment environment)
+        public static void UpdateEnvironmentLoop()
         {
             while (true)
             {
-                Thread.Sleep(1500);
-                //TODO remove testing parameters
-                //environment.UpdateEnvironment();
-
-                environment.UpdateEnvironment(100000, 100000, 100000, 100000);
-
-                environment.DrawEnvironment();
-
+                if(environmentCanUpdate)
+                {
+                    Thread.Sleep(1500);
+                    mansion.UpdateEnvironment();
+                    mansion.DrawEnvironment();
+                    agentCanMove = true;
+                    environmentCanUpdate = false;
+                }
             }
         }
     }
