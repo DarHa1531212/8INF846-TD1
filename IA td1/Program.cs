@@ -26,13 +26,15 @@ namespace AI_TD1
                  if (result == 49)
                  {
                     isInformed = false;
-                     validresponse = true;
-                 }
+                    validresponse = true;
+                    Console.WriteLine("Chosen agent : Non informed");
+                }
                  else if (result == 50)
                  {
                     isInformed = true;
                     validresponse = true;
-                 }
+                    Console.WriteLine("Chosen agent : Informed");
+                }
                  else
                  {
                      Console.WriteLine("Wrong character, try again");
@@ -62,7 +64,7 @@ namespace AI_TD1
             {
                 if(environmentCanUpdate)
                 {
-                    Thread.Sleep(1500);
+                    Thread.Sleep(1000);
                     mansion.UpdateEnvironment();
                     mansion.DrawEnvironment();
                     agentCanMove = true;

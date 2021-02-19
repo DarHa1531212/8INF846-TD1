@@ -1,15 +1,20 @@
 ﻿using System;
-using System.Threading;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AI_TD1
 {
     public class cEnvironment
     {
         #region Constants
+
+        /// <summary>
+        /// Average rate of dust drops (in turns)
+        /// </summary>
+        private const ushort _targetDustRate = 3;
+        /// <summary>
+        /// Average rate of jewel drops (in turns)
+        /// </summary>
+        private const ushort _targetJewelRate = 6;
 
         /// <summary>
         /// The dust drop RNG minimum limit
@@ -34,11 +39,11 @@ namespace AI_TD1
         /// <summary>
         /// The dust rate
         /// </summary>
-        private const double _dustRate = 100000 / 25 / 2;
+        private const double _dustRate = 100000 / 25 / _targetDustRate;
         /// <summary>
         /// The jewel rate
         /// </summary>
-        private const double _jewelRate = 100000 / 25 / 4;
+        private const double _jewelRate = 100000 / 25 / _targetJewelRate;
 
         #endregion
 
