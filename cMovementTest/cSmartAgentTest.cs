@@ -2888,12 +2888,6 @@ namespace cTests
                 Actions.Vacuum
             };
 
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine(goalNode.Action);
-
             //Assert
             CollectionAssert.AreEqual(expectedActionList, actionList);
         }
@@ -3007,10 +3001,6 @@ namespace cTests
             };
 
             //Assert
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
             CollectionAssert.AreEqual(expectedActionList, actionList);
         }
 
@@ -3101,11 +3091,6 @@ namespace cTests
                 Actions.PickUp,
             };
 
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
-
             //Assert
             CollectionAssert.AreEqual(expectedActionList, actionList);
         }
@@ -3160,11 +3145,6 @@ namespace cTests
                 Actions.Down,
                 Actions.PickUp
             };
-
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
 
             //Assert
             CollectionAssert.AreEqual(expectedActionList, actionList);
@@ -3221,11 +3201,6 @@ namespace cTests
                 Actions.Right,
                 Actions.Vacuum
             };
-
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
 
             //Assert
             CollectionAssert.AreEqual(expectedActionList, actionList);
@@ -3289,11 +3264,6 @@ namespace cTests
                 Actions.Down,
                 Actions.Vacuum
             };
-
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
 
 
             //Assert
@@ -3458,11 +3428,6 @@ namespace cTests
                 Actions.Right,
                 Actions.Vacuum
             };
-
-            foreach (var item in actionList)
-            {
-                Console.WriteLine(item);
-            }
 
             //Assert
             CollectionAssert.AreEqual(expectedActionList, actionList);

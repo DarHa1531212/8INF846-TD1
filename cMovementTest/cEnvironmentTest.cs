@@ -68,7 +68,7 @@ namespace cTests
 
             //Act
             cEnvironment environment2 = environment1.CopyEnvironment();
-            environment1.MoveAgent(Actions.Right);
+            environment1.DoAgentAction(Actions.Right);
 
             //Assert
             Assert.IsTrue(environment2.AgentPosX == 0);
@@ -109,7 +109,7 @@ namespace cTests
 
             //Act
             cEnvironment environment2 = environment1.CopyEnvironment();
-            environment1.MoveAgent(Actions.Vacuum);
+            environment1.DoAgentAction(Actions.Vacuum);
 
             //Assert
             CollectionAssert.AreNotEqual(
@@ -153,7 +153,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.PickUp);
+            target.DoAgentAction(Actions.PickUp);
 
             //Assert
             Assert.AreEqual('D', target.Environment[0, 0]);
@@ -174,7 +174,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             // Act
-            target.MoveAgent(Actions.PickUp);
+            target.DoAgentAction(Actions.PickUp);
 
             // Assert
             Assert.AreEqual('D', target.Environment[0, 0]);
@@ -195,7 +195,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             // Act
-            target.MoveAgent(Actions.PickUp);
+            target.DoAgentAction(Actions.PickUp);
 
             // Assert
             Assert.AreEqual('*', target.Environment[0, 0]);
@@ -216,7 +216,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             // Act
-            target.MoveAgent(Actions.PickUp);
+            target.DoAgentAction(Actions.PickUp);
 
             // Assert
             Assert.AreEqual('*', target.Environment[0, 0]);
@@ -237,7 +237,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.Right);
+            target.DoAgentAction(Actions.Right);
 
             //Assert
             Assert.AreEqual(
@@ -261,7 +261,31 @@ namespace cTests
             cEnvironment target = new cEnvironment(3, 2, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.Left);
+            target.DoAgentAction(Actions.Left);
+
+            //Assert
+            Assert.AreEqual(
+                Tuple.Create(2, 2),
+                Tuple.Create(target.AgentPosX, target.AgentPosY)
+            );
+
+        }
+
+        [TestMethod]
+        public void T_MoveAgent_None()
+        {
+            //Arrange
+            char[,] currentEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+            cEnvironment target = new cEnvironment(2, 2, currentEnvironment);
+
+            //Act
+            target.DoAgentAction(Actions.None);
 
             //Assert
             Assert.AreEqual(
@@ -285,7 +309,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(3, 2, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.Up);
+            target.DoAgentAction(Actions.Up);
 
             //Assert
             Assert.AreEqual(
@@ -309,7 +333,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(3, 2, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.Down);
+            target.DoAgentAction(Actions.Down);
 
             //Assert
             Assert.AreEqual(
@@ -333,7 +357,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.PickUp);
+            target.DoAgentAction(Actions.PickUp);
 
             //Assert
             Assert.AreNotEqual(target.Environment, currentEnvironment);
@@ -353,7 +377,7 @@ namespace cTests
             cEnvironment target = new cEnvironment(0, 0, currentEnvironment);
 
             //Act
-            target.MoveAgent(Actions.Vacuum);
+            target.DoAgentAction(Actions.Vacuum);
 
             //Assert
             Assert.AreNotEqual(target.Environment, currentEnvironment);
@@ -1245,6 +1269,139 @@ namespace cTests
 
             //Assert
             Assert.IsFalse(areEquals);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Clean()
+        {
+            //Arrange
+            char[,] cleanEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment environment = new cEnvironment(0, 0, cleanEnvironment);
+            int expectedDistance = 0;
+
+            // Act
+            int resultDistance = environment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_OnStuff()
+        {
+            //Arrange
+            char[,] cleanEnvironment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'D', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment environment = new cEnvironment(2, 3, cleanEnvironment);
+            int expectedDistance = 0;
+
+            // Act
+            int resultDistance = environment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Dusts()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', 'D', '*', '*' },
+                {'*', '*', 'D', '*', '*' },
+                {'D', 'D', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(0, 0, environment);
+            int expectedDistance = 10;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Jewels()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', 'J' },
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', '*', 'J', '*' },
+                {'J', '*', '*', '*', '*' },
+                {'*', '*', 'J', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(2, 3, environment);
+            int expectedDistance = 10;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+        [TestMethod]
+        public void T_ManhattanDistance_Both()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', 'B', '*', 'B', '*' },
+                {'*', '*', '*', '*', '*' },
+                {'*', 'B', '*', 'B', '*' },
+                {'*', '*', '*', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(2, 2, environment);
+            int expectedDistance = 8;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
+        }
+
+
+        [TestMethod]
+        public void T_ManhattanDistance_Multiple()
+        {
+            //Arrange
+            char[,] environment = {
+                {'*', '*', '*', '*', '*' },
+                {'*', '*', 'D', '*', 'J' },
+                {'*', 'J', '*', '*', '*' },
+                {'*', '*', 'B', '*', '*' },
+                {'B', '*', '*', '*', '*' }
+            };
+
+            cEnvironment cEnvironment = new cEnvironment(3, 3, environment);
+            int expectedDistance = 14;
+
+            // Act
+            int resultDistance = cEnvironment.ManhattanDistance();
+
+            // Assert
+            Assert.AreEqual(expectedDistance, resultDistance);
         }
     }
 }
