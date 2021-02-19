@@ -238,13 +238,13 @@ namespace AI_TD1
             {
 
                 case 'B':
-                    return new Tuple<char, int>('D', 1);
+                    return new Tuple<char, int>('D', 0);
                 case 'J':
-                    return new Tuple<char, int>('*', 1);
+                    return new Tuple<char, int>('*', 0);
                 case 'D':
-                    return new Tuple<char, int>('D', 1);
+                    return new Tuple<char, int>('D', 0);
                 default:
-                    return new Tuple<char, int>('*', 1);
+                    return new Tuple<char, int>('*', 0);
             }
         }
         #endregion

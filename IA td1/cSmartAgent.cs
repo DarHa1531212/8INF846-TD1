@@ -607,6 +607,7 @@ namespace AI_TD1
             return retrieveFirstAction(rootNode, IterativeDeepening(rootNode));
         }
 
+        // TODO : si FAILURE est retourné, que faire ?
         public cNode IterativeDeepening(cNode rootNode)
         {
             Tuple<cNode, RecursiveDLStatus> result =

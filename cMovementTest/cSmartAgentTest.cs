@@ -2733,10 +2733,10 @@ namespace cTests
             List<cNode> successors = agent.Expand(rootNode);
             IEnumerable<cNode> sVacuum = successors.Where(s => (
                 s.Action == Actions.Vacuum &&
-                s.ActionCost == -8 &&
+                s.ActionCost == 1 &&
                 s.Environment.AgentPosX == 2 &&
                 s.Environment.AgentPosY == 2 &&
-                s.RealCost == -3 &&
+                s.RealCost == 6 &&
                 s.Depth == 1 &&
                 s.Parent == rootNode
             ));
