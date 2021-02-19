@@ -54,7 +54,12 @@ namespace AI_TD1
         /// <summary>
         /// The dust vacuum bonus
         /// </summary>
-        private const int bonusVacuumDust = 0;
+        private const int bonusVacuumDust = 1;
+
+        /// <summary>
+        /// The bonus to pick up a jewel
+        /// </summary>
+        private const int bonusPickUpJewel = 1;
 
         /// <summary>
         /// The environment
@@ -200,11 +205,11 @@ namespace AI_TD1
         /// <returns>The vacuum action cost.</returns>
         private int CountVacuumActionCost()
         {
-            int cost = 1;
+            int cost = 0;
             if (IsJewelOnAgentPosition())
-                cost += penaltyVacuumJewel;
+                return penaltyVacuumJewel;
             if (IsDustOnAgentPosition())
-                cost += bonusVacuumDust;
+                return 0 - bonusVacuumDust;
 
             Console.WriteLine("cost : " + cost);
             return cost;
@@ -240,7 +245,7 @@ namespace AI_TD1
                 case 'B':
                     return new Tuple<char, int>('D', 0);
                 case 'J':
-                    return new Tuple<char, int>('*', 0);
+                    return new Tuple<char, int>('*', 0 - bonusPickUpJewel);
                 case 'D':
                     return new Tuple<char, int>('D', 0);
                 default:
@@ -289,7 +294,7 @@ namespace AI_TD1
                 case Actions.Vacuum:
                     int vacuumActionCost = CountVacuumActionCost();
                     Environment[AgentPosX, AgentPosY] = '*';
-                    return vacuumActionCost;
+                    return 1 + vacuumActionCost;
                 default: // default action is None
                     return 0;
             }
@@ -408,8 +413,7 @@ namespace AI_TD1
         /// </summary>
         /// <param name="other">The other instance.</param>
         /// <returns>
-        ///   <c>true</c> if both instances are the same; otherwise, <c>false</c>.
-
+        /// <c>true</c> if both instances are the same; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(cEnvironment other)
         {

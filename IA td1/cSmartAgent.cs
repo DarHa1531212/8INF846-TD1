@@ -77,6 +77,7 @@ namespace AI_TD1
                     List<cEnvironment> forbiddenStates = new List<cEnvironment>();
                     if (isInformed)
                     {
+                        //TODO call informed exploration
                         //exploration informée
                     }
                     else
@@ -428,29 +429,6 @@ namespace AI_TD1
             return potentialMoves;
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //public Actions findBestAction(cEnvironment initialState)
         //{
