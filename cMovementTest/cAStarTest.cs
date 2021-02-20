@@ -25,7 +25,7 @@ namespace cTests
             cSmartAgent agent = new cSmartAgent();
 
             // Act
-            cNode resultNode = agent.getLeastCostingNode(nodeList);
+            cNode resultNode = agent.GetLeastCostingNode(nodeList);
 
             // Assert
             Assert.IsTrue(expectedNode.Equals(resultNode));
@@ -52,7 +52,7 @@ namespace cTests
             cSmartAgent agent = new cSmartAgent();
 
             // Act
-            cNode resultNode = agent.getLeastCostingNode(nodeList);
+            cNode resultNode = agent.GetLeastCostingNode(nodeList);
 
             // Assert
             Assert.IsTrue(expectedNode.Equals(resultNode));
@@ -104,7 +104,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -153,7 +153,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -202,7 +202,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -251,7 +251,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -299,7 +299,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -345,7 +345,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -393,7 +393,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -440,7 +440,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -488,7 +488,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -532,7 +532,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -572,7 +572,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -612,7 +612,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -652,7 +652,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -691,7 +691,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -728,7 +728,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -767,7 +767,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -805,7 +805,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -844,7 +844,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -888,7 +888,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -928,7 +928,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -968,7 +968,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1008,7 +1008,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1047,7 +1047,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1084,7 +1084,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1123,7 +1123,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1161,7 +1161,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1200,7 +1200,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1236,7 +1236,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1267,7 +1267,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1298,7 +1298,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1329,7 +1329,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1359,7 +1359,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1387,7 +1387,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1417,7 +1417,7 @@ namespace cTests
             expectedNodes.Add(new cNode(downEnvironment, Actions.Down, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1446,7 +1446,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1476,7 +1476,7 @@ namespace cTests
             expectedNodes.Add(new cNode(upEnvironment, Actions.Up, 1));
 
             // Act
-            List<cNode> resultSuccessors = agent.generateSuccessors(baseNode);
+            List<cNode> resultSuccessors = agent.GenerateSuccessors(baseNode);
 
             // Assert
             CollectionAssert.AreEqual(expectedNodes, resultSuccessors);
@@ -1497,7 +1497,7 @@ namespace cTests
 
             cSmartAgent agent = new cSmartAgent();
             // Act
-            Actions resultAction = agent.retrieveFirstAction(rootNode, node1);
+            Actions resultAction = agent.RetrieveFirstAction(rootNode, node1);
 
             // Assert
             Assert.AreEqual(expectedAction, resultAction);
@@ -1530,7 +1530,7 @@ namespace cTests
 
             cSmartAgent agent = new cSmartAgent();
             // Act
-            Actions resultAction = agent.retrieveFirstAction(rootNode, node4);
+            Actions resultAction = agent.RetrieveFirstAction(rootNode, node4);
 
             // Assert
             Assert.AreEqual(expectedAction, resultAction);

@@ -10,11 +10,12 @@ namespace AI_TD1
         /// <summary>
         /// Average rate of dust drops (in turns)
         /// </summary>
-        private const ushort _targetDustRate = 3;
+        private const ushort _targetDustRate = 2;
         /// <summary>
         /// Average rate of jewel drops (in turns)
         /// </summary>
-        private const ushort _targetJewelRate = 6;
+        private const ushort _targetJewelRate = 4;
+
 
         /// <summary>
         /// The dust drop RNG minimum limit
@@ -44,23 +45,24 @@ namespace AI_TD1
         /// The jewel rate
         /// </summary>
         private const double _jewelRate = 100000 / 25 / _targetJewelRate;
-
-        #endregion
-
-        #region Attributes
+        
         /// <summary>
         /// The penalty when vacuuming the jewel
         /// </summary>
-        private const int penaltyVacuumJewel = 12;
+        private const int _penaltyVacuumJewel = 12;
         /// <summary>
         /// The dust vacuum bonus
         /// </summary>
-        private const int bonusVacuumDust = 1;
+        private const int _bonusVacuumDust = 1;
 
         /// <summary>
         /// The bonus to pick up a jewel
         /// </summary>
-        private const int bonusPickUpJewel = 1;
+        private const int _bonusPickUpJewel = 1;
+        #endregion
+
+        #region Attributes
+
 
         /// <summary>
         /// The environment
@@ -206,9 +208,9 @@ namespace AI_TD1
         {
             int cost = 0;
             if (IsJewelOnAgentPosition())
-                return penaltyVacuumJewel;
+                return _penaltyVacuumJewel;
             if (IsDustOnAgentPosition())
-                return 0 - bonusVacuumDust;
+                return 0 - _bonusVacuumDust;
             return cost;
         }
 
@@ -240,9 +242,9 @@ namespace AI_TD1
             {
 
                 case 'B':
-                    return new Tuple<char, int>('D', 0 - bonusPickUpJewel);
+                    return new Tuple<char, int>('D', 0 - _bonusPickUpJewel);
                 case 'J':
-                    return new Tuple<char, int>('*', 0 - bonusPickUpJewel);
+                    return new Tuple<char, int>('*', 0 - _bonusPickUpJewel);
                 case 'D':
                     return new Tuple<char, int>('D', 0);
                 default:

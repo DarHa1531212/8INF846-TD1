@@ -2846,7 +2846,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Down,
@@ -2881,7 +2881,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Up,
@@ -2916,7 +2916,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Right,
@@ -2951,7 +2951,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Left,
@@ -2986,7 +2986,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Up,
@@ -3028,7 +3028,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Right,
@@ -3073,7 +3073,7 @@ namespace cTests
 
             //Act
             cNode goalNode = agent.IterativeDeepening(rootNode);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, goalNode);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, goalNode);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Right,
@@ -3293,9 +3293,9 @@ namespace cTests
             rootNode.Depth = 0;
 
             //Act
-            Tuple<cNode, cSmartAgent.RecursiveDLStatus> result = agent.RecursiveDLS(rootNode, 12, alreadyVisitedNodes);
+            Tuple<cNode, RecursiveDLSStatus> result = agent.RecursiveDLS(rootNode, 12, alreadyVisitedNodes);
             Console.WriteLine(result.Item1 + " " + result.Item2);
-            List<Actions> actionList = agent.retrieveActionList(rootNode, result.Item1);
+            List<Actions> actionList = agent.RetrieveActionList(rootNode, result.Item1);
             List<Actions> expectedActionList = new List<Actions>
             {
                 Actions.Right,
@@ -3340,8 +3340,8 @@ namespace cTests
             rootNode.Depth = 0;
 
             //Act
-            Tuple<cNode, cSmartAgent.RecursiveDLStatus> result = agent.RecursiveDLS(rootNode, 0, alreadyVisitedNodes);
-            cSmartAgent.RecursiveDLStatus expectedStatus = cSmartAgent.RecursiveDLStatus.CUTOFF;
+            Tuple<cNode, RecursiveDLSStatus> result = agent.RecursiveDLS(rootNode, 0, alreadyVisitedNodes);
+            RecursiveDLSStatus expectedStatus = RecursiveDLSStatus.CUTOFF;
 
             //Assert
             Assert.AreEqual(expectedStatus, result.Item2);
@@ -3370,8 +3370,8 @@ namespace cTests
             rootNode.Depth = 0;
 
             //Act
-            Tuple<cNode, cSmartAgent.RecursiveDLStatus> result = agent.RecursiveDLS(rootNode, 4, alreadyVisitedNodes);
-            cSmartAgent.RecursiveDLStatus expectedStatus = cSmartAgent.RecursiveDLStatus.CUTOFF;
+            Tuple<cNode, RecursiveDLSStatus> result = agent.RecursiveDLS(rootNode, 4, alreadyVisitedNodes);
+            RecursiveDLSStatus expectedStatus = RecursiveDLSStatus.CUTOFF;
 
             //Assert
             Assert.AreEqual(expectedStatus, result.Item2);

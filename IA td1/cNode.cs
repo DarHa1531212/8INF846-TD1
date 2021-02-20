@@ -115,7 +115,15 @@ namespace AI_TD1
 
         #endregion
 
-        #region Operators
+        #region Operators        
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="node1">The node1.</param>
+        /// <param name="node2">The node2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator ==(cNode node1, cNode node2)
         {
             if (ReferenceEquals(node1, node2))
@@ -134,6 +142,14 @@ namespace AI_TD1
             return node1.Equals(node2);
         }
 
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="node1">The node1.</param>
+        /// <param name="node2">The node2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator !=(cNode node1, cNode node2)
         {
             return !(node1 == node2);

@@ -13,6 +13,10 @@ namespace AI_TD1
         private static bool agentCanMove = false;
         private static bool environmentCanUpdate = true;
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
              bool validresponse = false;
@@ -50,7 +54,7 @@ namespace AI_TD1
             {
                 if(agentCanMove)
                 {
-                    cEnvironment updatedMansion = agent.lifeCycle(mansion);
+                    cEnvironment updatedMansion = agent.LifeCycle(mansion);
                     mansion = updatedMansion.CopyEnvironment();
                     agentCanMove = false;
                     environmentCanUpdate = true;
@@ -58,6 +62,9 @@ namespace AI_TD1
             }
         }
 
+        /// <summary>
+        /// Loop updating the environment.
+        /// </summary>
         public static void UpdateEnvironmentLoop()
         {
             while (true)

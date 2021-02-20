@@ -13,9 +13,14 @@ namespace AI_TD1
         Right, Left, Up, Down, PickUp, Vacuum, None
     }
 
+    public enum RecursiveDLSStatus { SUCCESS, FAILURE, CUTOFF };
+
+
     public class cSmartAgent
     {
         #region Constants
+
+
 
         /// <summary>
         /// The penalty for vacuuming a jewel
@@ -70,13 +75,18 @@ namespace AI_TD1
 
         #region Public Methods
 
-        public cEnvironment lifeCycle(cEnvironment mansion)
+        /// <summary>
+        /// This function calls the search functions
+        /// </summary>
+        /// <param name="mansion">The environment.</param>
+        /// <returns>The environment after executing the action returned by the search function</returns>
+        public cEnvironment LifeCycle(cEnvironment mansion)
         {
             cNode rootNode = new cNode(mansion, Actions.None, 0);
             rootNode.Parent = null;
             rootNode.RealCost = 0;
             rootNode.Depth = 0;
-            
+
             Actions actionToExecute = Actions.None;
 
             if (isInformed)
@@ -85,10 +95,10 @@ namespace AI_TD1
             }
             else
             {
-                actionToExecute = retrieveFirstAction(rootNode, IterativeDeepening(rootNode));
+                actionToExecute = RetrieveFirstAction(rootNode, IterativeDeepening(rootNode));
             }
             actualCost += mansion.DoAgentAction(actionToExecute);
-            
+
             return mansion;
         }
 
@@ -123,16 +133,16 @@ namespace AI_TD1
             while (openNodesList.Count != 0)
             {
 
-                cNode leastCostingNode = getLeastCostingNode(openNodesList);
+                cNode leastCostingNode = GetLeastCostingNode(openNodesList);
 
                 openNodesList.Remove(leastCostingNode);
 
                 if (leastCostingNode.Environment.IsClean())
                 {
-                    return retrieveFirstAction(rootNode, leastCostingNode);
+                    return RetrieveFirstAction(rootNode, leastCostingNode);
                 }
 
-                List<cNode> successors = generateSuccessors(leastCostingNode);
+                List<cNode> successors = GenerateSuccessors(leastCostingNode);
 
                 foreach (var successor in successors)
                 {
@@ -180,7 +190,7 @@ namespace AI_TD1
         /// </summary>
         /// <param name="openNodesList">The open nodes list.</param>
         /// <returns>The least costing node.</returns>
-        public cNode getLeastCostingNode(List<cNode> openNodesList)
+        public cNode GetLeastCostingNode(List<cNode> openNodesList)
         {
             cNode leastCostingNode = new cNode();
             leastCostingNode.EstimatedCost = int.MaxValue;
@@ -199,7 +209,7 @@ namespace AI_TD1
         /// </summary>
         /// <param name="parent">The parent.</param>
         /// <returns>The list of successor nodes</returns>
-        public List<cNode> generateSuccessors(cNode parent)
+        public List<cNode> GenerateSuccessors(cNode parent)
         {
             List<cNode> successors = new List<cNode>();
 
@@ -243,7 +253,7 @@ namespace AI_TD1
         /// <param name="rootNode">The root node.</param>
         /// <param name="goalNode">The goal node.</param>
         /// <returns>The first action</returns>
-        public Actions retrieveFirstAction(cNode rootNode, cNode goalNode)
+        public Actions RetrieveFirstAction(cNode rootNode, cNode goalNode)
         {
             cNode currentNode = goalNode;
             while (currentNode.Parent != null && !currentNode.Parent.Environment.Equals(rootNode.Environment))
@@ -253,7 +263,13 @@ namespace AI_TD1
             return currentNode.Action;
         }
 
-        public List<Actions> retrieveActionList(cNode rootNode, cNode goalNode)
+        /// <summary>
+        /// Retrieves the action list.
+        /// </summary>
+        /// <param name="rootNode">The root node.</param>
+        /// <param name="goalNode">The goal node.</param>
+        /// <returns>The action list</returns>
+        public List<Actions> RetrieveActionList(cNode rootNode, cNode goalNode)
         {
             List<Actions> actionList = new List<Actions>();
             cNode currentNode = goalNode;
@@ -266,11 +282,16 @@ namespace AI_TD1
             actionList.Reverse();
             return actionList;
         }
-        
+
         #endregion
 
         #region Non Informed
 
+        /// <summary>
+        /// Finds the best action.
+        /// </summary>
+        /// <param name="initialState">The initial state.</param>
+        /// <returns>the action</returns>
         public Actions FindBestAction(cEnvironment initialState)
         {
             cNode rootNode = new cNode(initialState);
@@ -280,16 +301,20 @@ namespace AI_TD1
             rootNode.Parent = null;
             rootNode.Depth = 0;
 
-            return retrieveFirstAction(rootNode, IterativeDeepening(rootNode));
+            return RetrieveFirstAction(rootNode, IterativeDeepening(rootNode));
         }
 
-        // TODO : si FAILURE est retourné, que faire ?
+        /// <summary>
+        /// Iterative deepening search function
+        /// </summary>
+        /// <param name="rootNode">The root node.</param>
+        /// <returns>The goal node, by using the parent pointers, we can find the path reach this goal node</returns>
         public cNode IterativeDeepening(cNode rootNode)
         {
-            Tuple<cNode, RecursiveDLStatus> result =
-                new Tuple<cNode, RecursiveDLStatus>(null, RecursiveDLStatus.FAILURE);
+            Tuple<cNode, RecursiveDLSStatus> result =
+                new Tuple<cNode, RecursiveDLSStatus>(null, RecursiveDLSStatus.FAILURE);
             ushort maxDepth = 0;
-            while (result.Item2 != RecursiveDLStatus.SUCCESS)
+            while (result.Item2 != RecursiveDLSStatus.SUCCESS)
             {
                 List<cNode> alreadyVisitedNodes = new List<cNode>();
                 result = RecursiveDLS(rootNode, maxDepth, alreadyVisitedNodes);
@@ -297,30 +322,40 @@ namespace AI_TD1
             }
             return result.Item1;
         }
-        
-        public enum RecursiveDLStatus { SUCCESS, FAILURE, CUTOFF };
+
 
         /*
          * Inspired by pseudocode from
          * 8INF846 - Semaine #3 Exploration non informée - Diapo 33
         */
-        public Tuple<cNode, RecursiveDLStatus> RecursiveDLS(cNode currentNode, ushort maxDepth, List<cNode> alreadyVisitedNodes)
+        /// <summary>
+        /// Recursive Depth Limited Search.
+        /// </summary>
+        /// <param name="currentNode">The current node.</param>
+        /// <param name="maxDepth">The maximum depth.</param>
+        /// <param name="alreadyVisitedNodes">The already visited nodes.</param>
+        /// <returns>There are 3 cases: 
+        /// 1- If the function reaches a goal stae, the goal node is returned
+        /// 2- If the function does not find a goal node, null is returned 
+        /// 3- if the function hits an error, null is returned
+        /// in each case, the Recursive DLS Status is returned</returns>
+        public Tuple<cNode, RecursiveDLSStatus> RecursiveDLS(cNode currentNode, ushort maxDepth, List<cNode> alreadyVisitedNodes)
         {
             bool cutoffOccured = false;
 
             if (currentNode.Environment.IsClean())
             {
-                return new Tuple<cNode, RecursiveDLStatus>(
+                return new Tuple<cNode, RecursiveDLSStatus>(
                     currentNode,
-                    RecursiveDLStatus.SUCCESS
+                    RecursiveDLSStatus.SUCCESS
                 );
             }
 
             if (currentNode.Depth > maxDepth || alreadyVisitedNodes.Contains(currentNode))
             {
-                return new Tuple<cNode, RecursiveDLStatus>(
+                return new Tuple<cNode, RecursiveDLSStatus>(
                     null,
-                    RecursiveDLStatus.CUTOFF
+                    RecursiveDLSStatus.CUTOFF
                 );
             }
 
@@ -333,54 +368,56 @@ namespace AI_TD1
             {
                 try
                 {
-                    Tuple<cNode, RecursiveDLStatus> result = RecursiveDLS(successor, maxDepth, alreadyVisitedNodesExtended);
+                    Tuple<cNode, RecursiveDLSStatus> result = RecursiveDLS(successor, maxDepth, alreadyVisitedNodesExtended);
 
-                    if (result.Item2 == RecursiveDLStatus.CUTOFF)
+                    if (result.Item2 == RecursiveDLSStatus.CUTOFF)
                     {
                         cutoffOccured = true;
                     }
 
-                    if (result.Item2 == RecursiveDLStatus.SUCCESS)
+                    if (result.Item2 == RecursiveDLSStatus.SUCCESS)
                     {
                         return result;
                     }
 
-                    if (result.Item2 == RecursiveDLStatus.FAILURE)
+                    if (result.Item2 == RecursiveDLSStatus.FAILURE)
                     {
-                        return new Tuple<cNode, RecursiveDLStatus>(
+                        return new Tuple<cNode, RecursiveDLSStatus>(
                             null,
-                            RecursiveDLStatus.FAILURE
+                            RecursiveDLSStatus.FAILURE
                         );
                     }
                 }
                 catch (OutOfMemoryException e)
                 {
                     Console.WriteLine(e.Message);
-                    return new Tuple<cNode, RecursiveDLStatus>(
+                    return new Tuple<cNode, RecursiveDLSStatus>(
                         null,
-                        RecursiveDLStatus.FAILURE
+                        RecursiveDLSStatus.FAILURE
                     );
                 }
             }
 
             if (cutoffOccured)
             {
-                return new Tuple<cNode, RecursiveDLStatus>(
+                return new Tuple<cNode, RecursiveDLSStatus>(
                     null,
-                    RecursiveDLStatus.CUTOFF
+                    RecursiveDLSStatus.CUTOFF
                 );
             }
 
-            return new Tuple<cNode, RecursiveDLStatus>(
+            return new Tuple<cNode, RecursiveDLSStatus>(
                 null,
-                RecursiveDLStatus.FAILURE
+                RecursiveDLSStatus.FAILURE
             );
         }
 
-        /*
-         * Inspired by pseudocode from
-         * 8INF846 - Semaine #3 Exploration non informée - Diapo 22
-        */
+
+        /// <summary>
+        /// Generates the sucessor nodes of the speciffied parent node
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <returns>The child nodes</returns>
         public List<cNode> Expand(cNode parent)
         {
             List<cNode> successors = new List<cNode>();
@@ -401,7 +438,11 @@ namespace AI_TD1
             return successors;
         }
 
-        /* TODO : Se mettre d'accord sur la génération des enfants */
+        /// <summary>
+        /// Lists all possible action in the current environment
+        /// </summary>
+        /// <param name="environment">The environment.</param>
+        /// <returns>The list of possible actions</returns>
         public List<Actions> SuccessorFn(cEnvironment environment)
         {
             List<Actions> potentialActions = new List<Actions>();
